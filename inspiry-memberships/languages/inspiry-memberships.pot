@@ -16,7 +16,7 @@ msgstr ""
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;_nx_noop:1,2,3c;_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Generator: Poedit 3.4.4\n"
+"X-Generator: Poedit 3.5\n"
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: *.js\n"
 "X-Poedit-SearchPathExcluded-1: svn\n"
@@ -440,7 +440,7 @@ msgid "Error occurred while processing order."
 msgstr ""
 
 #: resources/payment-handler/class-paypal-payment-handler.php:135
-msgid "Nonce verification failed."
+msgid "Security verification failed, please refresh the page and try again."
 msgstr ""
 
 #: resources/payment-handler/class-paypal-payment-handler.php:143

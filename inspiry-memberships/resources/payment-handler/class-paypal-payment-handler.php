@@ -132,7 +132,7 @@ if ( ! class_exists( 'IMS_PayPal_Payment_Handler' ) ) :
 			if ( ! isset( $_POST['nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['nonce'] ) ), 'membership-paypal-nonce' ) ) {
 				echo wp_json_encode( array(
 					'success' => false,
-					'message' => esc_html__( 'Nonce verification failed.', 'inspiry-memberships' ),
+					'message' => esc_html__( 'Security verification failed, please refresh the page and try again.', 'inspiry-memberships' ),
 				) );
 				die();
 			}

@@ -3,8 +3,8 @@
  * Plugin Name:     RealHomes Memberships
  * Plugin URI:      https://github.com/InspiryThemes/inspiry-memberships
  * Description:     Provides functionality to create membership packages for real estate RealHomes theme by InspiryThemes
- * Version:         3.0.2
- * Tested up to:    6.6.0
+ * Version:         3.0.3
+ * Tested up to:    6.7
  * Requires PHP:    7.4
  * Author:          InspiryThemes
  * Author URI:      https://themeforest.net/item/real-homes-wordpress-real-estate-theme/5373914
