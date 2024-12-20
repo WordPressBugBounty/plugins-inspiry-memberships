@@ -72,12 +72,15 @@ if ( ! class_exists( 'IMS_PayPal_Payment_Handler' ) ) :
 		 */
 		public function __construct() {
 
+			// Get basic settings.
+			$basic_settings = get_option( 'ims_basic_settings' );
+
 			// Get PayPal settings.
 			$paypal_settings = get_option( 'ims_paypal_settings' );
 
 			$this->client_id     = empty( $paypal_settings['ims_paypal_client_id'] ) ? '' : esc_html( $paypal_settings['ims_paypal_client_id'] );
 			$this->client_secret = empty( $paypal_settings['ims_paypal_client_secret'] ) ? '' : esc_html( $paypal_settings['ims_paypal_client_secret'] );
-			$this->currency_code = empty( $paypal_settings['ims_currency_code'] ) ? 'USD' : esc_html( $paypal_settings['ims_currency_code'] );
+			$this->currency_code = empty( $basic_settings['ims_currency_code'] ) ? 'USD' : esc_html( $basic_settings['ims_currency_code'] );
 
 
 			// Setting PayPal API URLs
@@ -558,10 +561,10 @@ if ( ! class_exists( 'IMS_PayPal_Payment_Handler' ) ) :
 				if ( 0 === strcmp( $result, "VERIFIED" ) ) {
 
 					// The IPN is verified, process it.
-					$payment_status   = ( isset( $_POST['payment_status'] ) && ! empty( $_POST['payment_status'] ) ) ? sanitize_text_field( $_POST['payment_status'] ) : false;
-					$txn_id           = ( isset( $_POST['txn_id'] ) && ! empty( $_POST['txn_id'] ) ) ? sanitize_text_field( $_POST['txn_id'] ) : false;
-					$txn_type         = ( isset( $_POST['txn_type'] ) && ! empty( $_POST['txn_type'] ) ) ? sanitize_text_field( $_POST['txn_type'] ) : false;
-					$recurring_id     = ( isset( $_POST['recurring_payment_id'] ) && ! empty( $_POST['recurring_payment_id'] ) ) ? sanitize_text_field( $_POST['recurring_payment_id'] ) : false;
+					$payment_status = ( isset( $_POST['payment_status'] ) && ! empty( $_POST['payment_status'] ) ) ? sanitize_text_field( $_POST['payment_status'] ) : false;
+					$txn_id         = ( isset( $_POST['txn_id'] ) && ! empty( $_POST['txn_id'] ) ) ? sanitize_text_field( $_POST['txn_id'] ) : false;
+					$txn_type       = ( isset( $_POST['txn_type'] ) && ! empty( $_POST['txn_type'] ) ) ? sanitize_text_field( $_POST['txn_type'] ) : false;
+					$recurring_id   = ( isset( $_POST['recurring_payment_id'] ) && ! empty( $_POST['recurring_payment_id'] ) ) ? sanitize_text_field( $_POST['recurring_payment_id'] ) : false;
 
 					$membership_methods = new IMS_Membership_Method();
 					$receipt_methods    = new IMS_Receipt_Method();

@@ -21,20 +21,20 @@ msgstr ""
 "X-Poedit-SearchPathExcluded-0: *.js\n"
 "X-Poedit-SearchPathExcluded-1: svn\n"
 
-#: inspiry-memberships.php:196 resources/settings/class-wp-osa.php:690
+#: inspiry-memberships.php:209 resources/settings/class-wp-osa.php:690
 #: resources/settings/class-wp-osa.php:691
 msgid "Settings"
 msgstr ""
 
-#: inspiry-memberships.php:197
+#: inspiry-memberships.php:210
 msgid "Setup Guide"
 msgstr ""
 
-#: inspiry-memberships.php:277
+#: inspiry-memberships.php:290
 msgid "Please deactivate the RealHomes Stripe Payments plugin to RealHomes Memberships plugin."
 msgstr ""
 
-#: inspiry-memberships.php:285
+#: inspiry-memberships.php:298
 msgid "Please deactivate the RealHomes PayPal Payments plugin to RealHomes Memberships plugin."
 msgstr ""
 
@@ -439,30 +439,30 @@ msgstr ""
 msgid "Error occurred while processing order."
 msgstr ""
 
-#: resources/payment-handler/class-paypal-payment-handler.php:135
+#: resources/payment-handler/class-paypal-payment-handler.php:138
 msgid "Security verification failed, please refresh the page and try again."
 msgstr ""
 
-#: resources/payment-handler/class-paypal-payment-handler.php:143
+#: resources/payment-handler/class-paypal-payment-handler.php:146
 #: resources/payment-handler/class-wire-transfer-handler.php:67
 msgid "Please select a membership to continue."
 msgstr ""
 
-#: resources/payment-handler/class-paypal-payment-handler.php:206
-#: resources/payment-handler/class-paypal-payment-handler.php:254
-#: resources/payment-handler/class-paypal-payment-handler.php:296
+#: resources/payment-handler/class-paypal-payment-handler.php:209
+#: resources/payment-handler/class-paypal-payment-handler.php:257
+#: resources/payment-handler/class-paypal-payment-handler.php:299
 msgid "Error: "
 msgstr ""
 
-#: resources/payment-handler/class-paypal-payment-handler.php:218
+#: resources/payment-handler/class-paypal-payment-handler.php:221
 msgid "Error: Unable to create PayPal order for the property."
 msgstr ""
 
-#: resources/payment-handler/class-paypal-payment-handler.php:266
+#: resources/payment-handler/class-paypal-payment-handler.php:269
 msgid "Error: Unable to retrieve access token"
 msgstr ""
 
-#: resources/payment-handler/class-paypal-payment-handler.php:336
+#: resources/payment-handler/class-paypal-payment-handler.php:339
 msgid "Error: Unable to capture payment for the property"
 msgstr ""
 

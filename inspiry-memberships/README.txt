@@ -2,8 +2,8 @@
 Contributors: inspirythemes, saqibsarwar, fahidjavid
 Tags: Membership, Real estate, Paid listing, Real estate memberships, Payments
 Requires at least: 6.0
-Tested up to: 6.7
-Stable tag: 3.0.3
+Tested up to: 6.7.1
+Stable tag: 3.0.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -73,6 +73,12 @@ Simplify your membership management and elevate user experience with our compreh
 7. Wire Transfer Settings
 
 == Changelog ==
+
+= 3.0.4 =
+* Fixed text-domain notice
+* Fixed PayPal currency code issue
+* Updated language file
+* Tested plugin with WordPress 6.7.1
 
 = 3.0.3 =
 * Improved nonce check statement

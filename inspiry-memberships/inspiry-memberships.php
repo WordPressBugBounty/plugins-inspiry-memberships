@@ -3,8 +3,8 @@
  * Plugin Name:     RealHomes Memberships
  * Plugin URI:      https://github.com/InspiryThemes/inspiry-memberships
  * Description:     Provides functionality to create membership packages for real estate RealHomes theme by InspiryThemes
- * Version:         3.0.3
- * Tested up to:    6.7
+ * Version:         3.0.4
+ * Tested up to:    6.7.1
  * Requires PHP:    7.4
  * Author:          InspiryThemes
  * Author URI:      https://themeforest.net/item/real-homes-wordpress-real-estate-theme/5373914
@@ -73,27 +73,22 @@ if ( ! class_exists( 'Inspiry_Memberships' ) ) :
 		 */
 		public function __construct() {
 
-            // Notice to deactivate if RealHomes Stripe payment plugin is already active.
+			// Notice to deactivate if RealHomes Stripe payment plugin is already active.
 			if ( class_exists( 'Inspiry_Stripe_Payments' ) ) {
 				add_action( 'admin_notices', array( $this, 'deactivate_stripe_plugin_notice' ) );
 
 				return;
 			}
 
-            // Notice to deactivate if RealHomes PayPal Payments plugin is already active.
+			// Notice to deactivate if RealHomes PayPal Payments plugin is already active.
 			if ( class_exists( 'Realhomes_Paypal_Payments' ) ) {
 				add_action( 'admin_notices', array( $this, 'deactivate_paypal_plugin_notice' ) );
 
 				return;
 			}
 
-
-			if ( ! function_exists( 'get_plugin_data' ) ) {
-				require_once( ABSPATH . 'wp-admin/includes/plugin.php' );
-			}
-
 			// setting version
-			$this->version = get_plugin_data( __FILE__ )['Version'];
+			$this->version = $this->get_plugin_details();
 
 			// Get started here.
 			$this->define_constants();
@@ -177,10 +172,28 @@ if ( ! class_exists( 'Inspiry_Memberships' ) ) :
 		 * @since 1.0.0
 		 */
 		public function init_hooks() {
-			add_action( 'plugins_loaded', array( $this, 'load_textdomain' ) );
+			add_action( 'init', array( $this, 'load_textdomain' ) );
 			add_filter( 'plugin_action_links_' . IMS_BASE_NAME, array( $this, 'plugin_action_links' ) );
 			add_action( 'wp_enqueue_scripts', array( $this, 'load_public_scripts' ) ); // Load public area scripts.
 			add_action( 'admin_enqueue_scripts', array( $this, 'load_admin_scripts' ) ); // Load admin area scripts.
+		}
+
+		/**
+		 * Get plugin details safely
+		 *
+		 * @since 3.0.4
+		 *
+		 * @param string $key Key to fetch plugin detail
+		 *
+		 * @return string|mixed
+		 */
+		public function get_plugin_details( $key = 'Version' ) {
+			require_once ABSPATH . 'wp-admin/includes/plugin.php';
+
+			// Prevent early translation call by setting $translate to false.
+			$plugin_data = get_plugin_data( __FILE__, false, false );
+
+			return $plugin_data[ $key ];
 		}
 
 		/**
