@@ -456,7 +456,7 @@ if ( ! class_exists( 'IMS_Helper_Functions' ) ) {
 
 									<?php
 									// Recurring payment option.
-									if ( ! empty( $package_price_digits ) && 'on' === $basic_settings['ims_recurring_memberships_enable'] ) {
+									if ( ! empty( $basic_settings['ims_recurring_memberships_enable'] ) && 'on' === $basic_settings['ims_recurring_memberships_enable'] && ! empty( $package_price_digits ) ) {
 										if ( empty( $price_adjustment ) ) {
 										?>
                                         <div id="ims-recurring-wrap" class="ims-recurring-wrap checkbox-field checkbox-field-white hide">
@@ -566,7 +566,7 @@ if ( ! class_exists( 'IMS_Helper_Functions' ) ) {
 			$ims_settings   = get_option( 'ims_basic_settings' );
 			$adjustment_net = false;
 
-			if ( 'on' === $ims_settings['ims_adjust_current_amount'] ) {
+			if ( ! empty( $ims_settings['ims_adjust_current_amount'] ) && 'on' === $ims_settings['ims_adjust_current_amount'] ) {
 				$the_current_user    = wp_get_current_user();
 				$current_membership  = self::ims_get_membership_by_user( $the_current_user );
 				$the_current_user_id = $the_current_user->ID;
@@ -648,9 +648,9 @@ if ( ! class_exists( 'IMS_Helper_Functions' ) ) {
 			) );
 
 			$featured_properties = count( $properties );
+			$current_membership  = self::ims_get_membership_by_user( get_userdata( $user_id ) );
 
 			if ( isset( $current_membership['featured_prop'] ) && $remaining === true ) {
-				$current_membership       = self::ims_get_membership_by_user( get_userdata( $user_id ) );
 				$current_allowed_featured = $current_membership['featured_prop'];
 				$featured_properties      = intval( $current_allowed_featured ) - $featured_properties;
 			}

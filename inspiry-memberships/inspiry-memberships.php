@@ -3,8 +3,8 @@
  * Plugin Name:     RealHomes Memberships
  * Plugin URI:      https://github.com/InspiryThemes/inspiry-memberships
  * Description:     Provides functionality to create membership packages for real estate RealHomes theme by InspiryThemes
- * Version:         3.0.4
- * Tested up to:    6.7.1
+ * Version:         3.0.5
+ * Tested up to:    6.8.1
  * Requires PHP:    7.4
  * Author:          InspiryThemes
  * Author URI:      https://themeforest.net/item/real-homes-wordpress-real-estate-theme/5373914
@@ -67,7 +67,7 @@ if ( ! class_exists( 'Inspiry_Memberships' ) ) :
 		}
 
 		/**
-		 * Method: Contructor.
+		 * Method: Constructor.
 		 *
 		 * @since 1.0.0
 		 */
@@ -91,6 +91,7 @@ if ( ! class_exists( 'Inspiry_Memberships' ) ) :
 			$this->version = $this->get_plugin_details();
 
 			// Get started here.
+            $this->disable_textdomain_autoregistration();
 			$this->define_constants();
 			$this->include_files();
 			$this->init_hooks();
@@ -98,6 +99,33 @@ if ( ! class_exists( 'Inspiry_Memberships' ) ) :
 			// Plugin is loaded.
 			do_action( 'ims_loaded' );
 
+		}
+
+        /**
+         * Disable textdomain autoloading for the plugin.
+         *
+         * @since 3.0.5
+         */
+		function disable_textdomain_autoregistration() {
+			if ( isset( $GLOBALS['wp_textdomain_registry'] ) ) {
+				try {
+					$registry = $GLOBALS['wp_textdomain_registry'];
+					$reflection = new ReflectionClass( $registry );
+					if ( $reflection->hasProperty( 'custom_paths' ) ) {
+						$prop = $reflection->getProperty( 'custom_paths' );
+						$prop->setAccessible( true );
+						$custom_paths = $prop->getValue( $registry );
+						if ( isset( $custom_paths['inspiry-memberships'] ) ) {
+							unset( $custom_paths['inspiry-memberships'] );
+							$prop->setValue( $registry, $custom_paths );
+						}
+						$prop->setAccessible( false );
+					}
+				} catch ( Exception $e ) {
+					// Optional: log or fail silently
+					error_log( 'Textdomain registry reflection error: ' . $e->getMessage() );
+				}
+			}
 		}
 
 		/**
