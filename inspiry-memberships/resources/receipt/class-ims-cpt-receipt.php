@@ -29,22 +29,22 @@ if ( ! class_exists( 'IMS_CPT_Receipt' ) ) {
 		public function register() {
 
 			$labels = array(
-				'name'               => esc_html__( 'Receipts', 'inspiry-memberships' ),
-				'singular_name'      => esc_html__( 'Receipt', 'inspiry-memberships' ),
-				'add_new'            => esc_html_x( 'Add New Receipt', 'inspiry-memberships', 'inspiry-memberships' ),
-				'add_new_item'       => esc_html__( 'Add New Receipt', 'inspiry-memberships' ),
-				'edit_item'          => esc_html__( 'Edit Receipt', 'inspiry-memberships' ),
-				'new_item'           => esc_html__( 'New Receipt', 'inspiry-memberships' ),
-				'view_item'          => esc_html__( 'View Receipt', 'inspiry-memberships' ),
-				'search_items'       => esc_html__( 'Search Receipts', 'inspiry-memberships' ),
-				'not_found'          => esc_html__( 'No Receipts found', 'inspiry-memberships' ),
-				'not_found_in_trash' => esc_html__( 'No Receipts found in Trash', 'inspiry-memberships' ),
-				'parent_item_colon'  => esc_html__( 'Parent Receipt:', 'inspiry-memberships' ),
-				'menu_name'          => esc_html__( 'Receipts', 'inspiry-memberships' ),
+				'name'               => esc_html__( 'Receipts', IMS_TEXT_DOMAIN ),
+				'singular_name'      => esc_html__( 'Receipt', IMS_TEXT_DOMAIN ),
+				'add_new'            => esc_html__( 'Add New Receipt', IMS_TEXT_DOMAIN ),
+				'add_new_item'       => esc_html__( 'Add New Receipt', IMS_TEXT_DOMAIN ),
+				'edit_item'          => esc_html__( 'Edit Receipt', IMS_TEXT_DOMAIN ),
+				'new_item'           => esc_html__( 'New Receipt', IMS_TEXT_DOMAIN ),
+				'view_item'          => esc_html__( 'View Receipt', IMS_TEXT_DOMAIN ),
+				'search_items'       => esc_html__( 'Search Receipts', IMS_TEXT_DOMAIN ),
+				'not_found'          => esc_html__( 'No Receipts found', IMS_TEXT_DOMAIN ),
+				'not_found_in_trash' => esc_html__( 'No Receipts found in Trash', IMS_TEXT_DOMAIN ),
+				'parent_item_colon'  => esc_html__( 'Parent Receipt:', IMS_TEXT_DOMAIN ),
+				'menu_name'          => esc_html__( 'Receipts', IMS_TEXT_DOMAIN ),
 			);
 
 			$rewrite = array(
-				'slug'       => apply_filters( 'ims_receipt_post_type_slug', esc_html__( 'receipt', 'inspiry-memberships' ) ),
+				'slug'       => apply_filters( 'ims_receipt_post_type_slug', esc_html__( 'receipt', IMS_TEXT_DOMAIN ) ),
 				'with_front' => true,
 				'pages'      => true,
 				'feeds'      => true,
@@ -53,7 +53,7 @@ if ( ! class_exists( 'IMS_CPT_Receipt' ) ) {
 			$args = array(
 				'labels'              => apply_filters( 'ims_receipt_post_type_labels', $labels ),
 				'hierarchical'        => false,
-				'description'         => esc_html__( 'Represents a receipt of membership.', 'inspiry-memberships' ),
+				'description'         => esc_html__( 'Represents a receipt of membership.', IMS_TEXT_DOMAIN ),
 				'public'              => true,
 				'exclude_from_search' => true,
 				'show_ui'             => true,

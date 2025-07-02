@@ -16,146 +16,146 @@ msgstr ""
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;_nx_noop:1,2,3c;_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Generator: Poedit 3.5\n"
+"X-Generator: Poedit 3.6\n"
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: *.js\n"
 "X-Poedit-SearchPathExcluded-1: svn\n"
 
-#: inspiry-memberships.php:209 resources/settings/class-wp-osa.php:690
+#: inspiry-memberships.php:242 resources/settings/class-wp-osa.php:690
 #: resources/settings/class-wp-osa.php:691
 msgid "Settings"
 msgstr ""
 
-#: inspiry-memberships.php:210
+#: inspiry-memberships.php:243
 msgid "Setup Guide"
 msgstr ""
 
-#: inspiry-memberships.php:290
+#: inspiry-memberships.php:323
 msgid "Please deactivate the RealHomes Stripe Payments plugin to RealHomes Memberships plugin."
 msgstr ""
 
-#: inspiry-memberships.php:298
+#: inspiry-memberships.php:331
 msgid "Please deactivate the RealHomes PayPal Payments plugin to RealHomes Memberships plugin."
 msgstr ""
 
-#: resources/class-helper-functions.php:245
+#: resources/class-helper-functions.php:244
 msgid "Are you sure?"
 msgstr ""
 
-#: resources/class-helper-functions.php:246
+#: resources/class-helper-functions.php:245
 msgid "Caution: "
 msgstr ""
 
-#: resources/class-helper-functions.php:246
+#: resources/class-helper-functions.php:245
 msgid "Membership cancellation is an irreversible action!"
 msgstr ""
 
-#: resources/class-helper-functions.php:247
+#: resources/class-helper-functions.php:246
 msgid "Yes"
 msgstr ""
 
-#: resources/class-helper-functions.php:248
+#: resources/class-helper-functions.php:247
 msgid "No"
 msgstr ""
 
-#: resources/class-helper-functions.php:265
+#: resources/class-helper-functions.php:264
 msgid "Day"
 msgstr ""
 
-#: resources/class-helper-functions.php:266
+#: resources/class-helper-functions.php:265
 #: resources/membership/class-membership-metaboxes.php:119
 msgid "Days"
 msgstr ""
 
-#: resources/class-helper-functions.php:267
+#: resources/class-helper-functions.php:266
 msgid "Week"
 msgstr ""
 
-#: resources/class-helper-functions.php:268
+#: resources/class-helper-functions.php:267
 #: resources/membership/class-membership-metaboxes.php:122
 msgid "Weeks"
 msgstr ""
 
-#: resources/class-helper-functions.php:269
+#: resources/class-helper-functions.php:268
 msgid "Month"
 msgstr ""
 
-#: resources/class-helper-functions.php:270
+#: resources/class-helper-functions.php:269
 #: resources/membership/class-membership-metaboxes.php:125
 msgid "Months"
 msgstr ""
 
-#: resources/class-helper-functions.php:271
+#: resources/class-helper-functions.php:270
 msgid "Year"
 msgstr ""
 
-#: resources/class-helper-functions.php:272
+#: resources/class-helper-functions.php:271
 #: resources/membership/class-membership-metaboxes.php:128
 msgid "Years"
 msgstr ""
 
-#: resources/class-helper-functions.php:306
-#: resources/class-helper-functions.php:550
+#: resources/class-helper-functions.php:305
+#: resources/class-helper-functions.php:549
 msgid "Invalid Package ID"
 msgstr ""
 
-#: resources/class-helper-functions.php:342
+#: resources/class-helper-functions.php:341
 msgid "Your Order"
 msgstr ""
 
-#: resources/class-helper-functions.php:348
+#: resources/class-helper-functions.php:347
 msgid "Package"
 msgstr ""
 
-#: resources/class-helper-functions.php:349
+#: resources/class-helper-functions.php:348
 #: resources/membership/class-membership-custom-columns.php:41
 #: resources/receipt/class-receipt-custom-columns.php:42
 #: resources/receipt/class-receipt-metaboxes.php:122
 msgid "Price"
 msgstr ""
 
-#: resources/class-helper-functions.php:361
+#: resources/class-helper-functions.php:360
 msgid "Current Package Adjustment"
 msgstr ""
 
-#: resources/class-helper-functions.php:368
+#: resources/class-helper-functions.php:367
 msgid "Total"
 msgstr ""
 
-#: resources/class-helper-functions.php:380
+#: resources/class-helper-functions.php:379
 msgid "Payment Method"
 msgstr ""
 
-#: resources/class-helper-functions.php:394
+#: resources/class-helper-functions.php:393
 msgid "Direct Bank Transfer"
 msgstr ""
 
-#: resources/class-helper-functions.php:403
+#: resources/class-helper-functions.php:402
 #: resources/receipt/class-receipt-custom-columns.php:134
 #: resources/receipt/class-receipt-metaboxes.php:169
 msgid "PayPal"
 msgstr ""
 
-#: resources/class-helper-functions.php:412
+#: resources/class-helper-functions.php:411
 #: resources/receipt/class-receipt-custom-columns.php:132
 #: resources/receipt/class-receipt-metaboxes.php:166
 msgid "Stripe"
 msgstr ""
 
-#: resources/class-helper-functions.php:464
+#: resources/class-helper-functions.php:463
 msgid "Recurring Payments?"
 msgstr ""
 
-#: resources/class-helper-functions.php:470
+#: resources/class-helper-functions.php:469
 msgid "The \"Recurring Payment\" option is not available when current package price adjustment is being processed."
 msgstr ""
 
-#: resources/class-helper-functions.php:512
-#: resources/class-helper-functions.php:546
+#: resources/class-helper-functions.php:511
+#: resources/class-helper-functions.php:545
 msgid "Complete Payment"
 msgstr ""
 
-#: resources/class-helper-functions.php:515
+#: resources/class-helper-functions.php:514
 msgid "Subscribe"
 msgstr ""
 
@@ -265,10 +265,6 @@ msgid "Membership"
 msgstr ""
 
 #: resources/membership/class-ims-cpt-membership.php:40
-msgctxt "inspiry-memberships"
-msgid "Add New Membership"
-msgstr ""
-
 #: resources/membership/class-ims-cpt-membership.php:41
 #: resources/settings/admin-menu.php:62
 msgid "Add New Membership"
@@ -420,6 +416,11 @@ msgstr ""
 msgid "Required, If you are using Stripe for recurring payments. For more details see related guide %s."
 msgstr ""
 
+#: resources/membership/class-membership-metaboxes.php:158
+#: resources/membership/class-membership-metaboxes.php:169
+msgid "by clicking here"
+msgstr ""
+
 #: resources/membership/class-membership-metaboxes.php:164
 msgid "PayPal Plan Price ID"
 msgstr ""
@@ -550,10 +551,6 @@ msgid "Receipt"
 msgstr ""
 
 #: resources/receipt/class-ims-cpt-receipt.php:34
-msgctxt "inspiry-memberships"
-msgid "Add New Receipt"
-msgstr ""
-
 #: resources/receipt/class-ims-cpt-receipt.php:35
 #: resources/settings/admin-menu.php:76
 msgid "Add New Receipt"

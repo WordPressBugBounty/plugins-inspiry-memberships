@@ -46,8 +46,8 @@ if ( ! class_exists( 'IMS_Admin_Menu' ) ) :
 
 			// Add menu page.
 			add_menu_page(
-				esc_html__( 'Memberships', 'inspiry-memberships' ),
-				esc_html__( 'Memberships', 'inspiry-memberships' ),
+				esc_html__( 'Memberships', IMS_TEXT_DOMAIN ),
+				esc_html__( 'Memberships', IMS_TEXT_DOMAIN ),
 				$this->menu_capability,
 				'inspiry_memberships',
 				'',
@@ -59,22 +59,22 @@ if ( ! class_exists( 'IMS_Admin_Menu' ) ) :
 			$sub_menus = array(
 				'addnew'        => array(
 					'inspiry_memberships',
-					esc_html__( 'Add New Membership', 'inspiry-memberships' ),
-					esc_html__( 'New Membership', 'inspiry-memberships' ),
+					esc_html__( 'Add New Membership', IMS_TEXT_DOMAIN ),
+					esc_html__( 'New Membership', IMS_TEXT_DOMAIN ),
 					'manage_options',
 					'post-new.php?post_type=ims_membership',
 				),
 				'receipts'      => array(
 					'inspiry_memberships',
-					esc_html__( 'Receipts', 'inspiry-memberships' ),
-					esc_html__( 'Receipts', 'inspiry-memberships' ),
+					esc_html__( 'Receipts', IMS_TEXT_DOMAIN ),
+					esc_html__( 'Receipts', IMS_TEXT_DOMAIN ),
 					'manage_options',
 					'edit.php?post_type=ims_receipt',
 				),
 				'addnewreceipt' => array(
 					'inspiry_memberships',
-					esc_html__( 'Add New Receipt', 'inspiry-memberships' ),
-					esc_html__( 'New Receipt', 'inspiry-memberships' ),
+					esc_html__( 'Add New Receipt', IMS_TEXT_DOMAIN ),
+					esc_html__( 'New Receipt', IMS_TEXT_DOMAIN ),
 					'manage_options',
 					'post-new.php?post_type=ims_receipt',
 				),

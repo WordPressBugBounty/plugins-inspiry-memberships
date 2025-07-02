@@ -687,8 +687,8 @@ if ( ! class_exists( 'WP_OSA' ) ) :
 		public function admin_menu() {
 			add_submenu_page(
 				'inspiry_memberships',
-				esc_html__( 'Settings', 'inspiry-memberships' ),
-				esc_html__( 'Settings', 'inspiry-memberships' ),
+				esc_html__( 'Settings', IMS_TEXT_DOMAIN ),
+				esc_html__( 'Settings', IMS_TEXT_DOMAIN ),
 				'manage_options',
 				'ims_settings',
 				array( $this, 'plugin_page' )
@@ -699,7 +699,7 @@ if ( ! class_exists( 'WP_OSA' ) ) :
 			?>
             <div id="realhomes-settings-wrap">
                 <header class="settings-header">
-                    <h1><?php esc_html_e( 'RealHomes Memberships Settings', 'inspiry-memberships' ); ?><span class="current-version-tag"><?php echo IMS_VERSION; ?></span></h1>
+                    <h1><?php esc_html_e( 'RealHomes Memberships Settings', IMS_TEXT_DOMAIN ); ?><span class="current-version-tag"><?php echo IMS_VERSION; ?></span></h1>
                     <p class="credit">
                         <a class="logo-wrap" href="https://themeforest.net/item/real-homes-wordpress-real-estate-theme/5373914?aid=inspirythemes" target="_blank">
                             <svg xmlns="http://www.w3.org/2000/svg" height="29" width="29" viewBox="0 0 36 41">
@@ -741,11 +741,11 @@ if ( ! class_exists( 'WP_OSA' ) ) :
                 <footer class="settings-footer">
                     <p>
                         <span class="dashicons dashicons-editor-help"></span>
-						<?php printf( esc_html__( 'For help, please consult the %1$s documentation %2$s of the plugin.', 'inspiry-memberships' ), '<a href="' . esc_url( IMS_DOCS_URL ) . '" target="_blank">', '</a>' ); ?>
+						<?php printf( esc_html__( 'For help, please consult the %1$s documentation %2$s of the plugin.', IMS_TEXT_DOMAIN ), '<a href="' . esc_url( IMS_DOCS_URL ) . '" target="_blank">', '</a>' ); ?>
                     </p>
                     <p>
                         <span class="dashicons dashicons-feedback"></span>
-	                    <?php printf( esc_html__( 'For feedback, please provide your %1$s feedback here! %2$s', 'inspiry-memberships' ), '<a href="' . esc_url( IMS_ISSUE_URL ) . '" target="_blank">', '</a>' ); ?>
+	                    <?php printf( esc_html__( 'For feedback, please provide your %1$s feedback here! %2$s', IMS_TEXT_DOMAIN ), '<a href="' . esc_url( IMS_ISSUE_URL ) . '" target="_blank">', '</a>' ); ?>
                     </p>
                 </footer>
             </div>

@@ -112,7 +112,6 @@ if ( ! class_exists( 'IMS_Helper_Functions' ) ) {
 					$formatted_price = esc_html( $currency_settings['ims_currency_symbol'] . $price );
 				}
 			} else {
-				//return esc_html__( 'Price not available', 'inspiry-memberships' );
 				if ( 'after' === $currency_position ) {
 					$formatted_price = esc_html( '0' . $currency_settings['ims_currency_symbol'] );
 				} else {
@@ -242,10 +241,10 @@ if ( ! class_exists( 'IMS_Helper_Functions' ) ) {
 			?>
             <div class="ims-cancel-membership-wrap">
                 <form action="" method="POST" id="ims-cancel-user-membership">
-                    <h4><?php esc_html_e( 'Are you sure?', 'inspiry-memberships' ); ?></h4>
-                    <p><strong><?php esc_html_e( 'Caution: ', 'inspiry-memberships' ); ?></strong><?php esc_html_e( 'Membership cancellation is an irreversible action!', 'inspiry-memberships' ); ?></p>
-                    <button class="btn btn-secondary" id="ims-btn-confirm" type="submit"><?php esc_html_e( 'Yes', 'inspiry-memberships' ); ?></button>
-                    <button class="btn btn-secondary" id="ims-btn-close" type="button"><?php esc_html_e( 'No', 'inspiry-memberships' ); ?></button>
+                    <h4><?php esc_html_e( 'Are you sure?', IMS_TEXT_DOMAIN ); ?></h4>
+                    <p><strong><?php esc_html_e( 'Caution: ', IMS_TEXT_DOMAIN ); ?></strong><?php esc_html_e( 'Membership cancellation is an irreversible action!', IMS_TEXT_DOMAIN ); ?></p>
+                    <button class="btn btn-secondary" id="ims-btn-confirm" type="submit"><?php esc_html_e( 'Yes', IMS_TEXT_DOMAIN ); ?></button>
+                    <button class="btn btn-secondary" id="ims-btn-close" type="button"><?php esc_html_e( 'No', IMS_TEXT_DOMAIN ); ?></button>
                     <input type="hidden" name="action" value="ims_cancel_user_membership" />
                     <input type="hidden" name="user_id" value="<?php echo esc_attr( $user_id ); ?>" />
                     <input type="hidden" name="ims_cancel_membership_nonce" value="<?php echo wp_create_nonce( 'ims-cancel-membership-nonce' ); ?>" />
@@ -262,14 +261,14 @@ if ( ! class_exists( 'IMS_Helper_Functions' ) ) {
 		public static function get_readable_duration_unit( $duration_unit ) {
 
 			$duration_units = array(
-				'day'    => esc_html__( 'Day', 'inspiry-memberships' ),
-				'days'   => esc_html__( 'Days', 'inspiry-memberships' ),
-				'week'   => esc_html__( 'Week', 'inspiry-memberships' ),
-				'weeks'  => esc_html__( 'Weeks', 'inspiry-memberships' ),
-				'month'  => esc_html__( 'Month', 'inspiry-memberships' ),
-				'months' => esc_html__( 'Months', 'inspiry-memberships' ),
-				'year'   => esc_html__( 'Year', 'inspiry-memberships' ),
-				'years'  => esc_html__( 'Years', 'inspiry-memberships' ),
+				'day'    => esc_html__( 'Day', IMS_TEXT_DOMAIN ),
+				'days'   => esc_html__( 'Days', IMS_TEXT_DOMAIN ),
+				'week'   => esc_html__( 'Week', IMS_TEXT_DOMAIN ),
+				'weeks'  => esc_html__( 'Weeks', IMS_TEXT_DOMAIN ),
+				'month'  => esc_html__( 'Month', IMS_TEXT_DOMAIN ),
+				'months' => esc_html__( 'Months', IMS_TEXT_DOMAIN ),
+				'year'   => esc_html__( 'Year', IMS_TEXT_DOMAIN ),
+				'years'  => esc_html__( 'Years', IMS_TEXT_DOMAIN ),
 			);
 
 			if ( ! empty( $duration_unit ) && isset( $duration_units[ $duration_unit ] ) ) {
@@ -303,7 +302,7 @@ if ( ! class_exists( 'IMS_Helper_Functions' ) ) {
 
 				// Check for valid package id.
 				if ( 'publish' !== get_post_status( $package_id ) ) {
-					printf( '<div class="dashboard-no-items"><p><strong>%s</strong></p></div>', esc_html__( 'Invalid Package ID', 'inspiry-memberships' ) );
+					printf( '<div class="dashboard-no-items"><p><strong>%s</strong></p></div>', esc_html__( 'Invalid Package ID', IMS_TEXT_DOMAIN ) );
 
 					return;
 				}
@@ -339,14 +338,14 @@ if ( ! class_exists( 'IMS_Helper_Functions' ) ) {
                         <div class="col-lg-4 order-lg-2">
                             <div class="box">
                                 <div class="box-head">
-                                    <h3 class="box-title"><?php esc_html_e( 'Your Order', 'inspiry-memberships' ); ?></h3>
+                                    <h3 class="box-title"><?php esc_html_e( 'Your Order', IMS_TEXT_DOMAIN ); ?></h3>
                                 </div>
                                 <div class="box-body">
                                     <table class="package-order-table">
                                         <thead>
                                         <tr>
-                                            <th><?php esc_html_e( 'Package', 'inspiry-memberships' ); ?></th>
-                                            <th><?php esc_html_e( 'Price', 'inspiry-memberships' ); ?></th>
+                                            <th><?php esc_html_e( 'Package', IMS_TEXT_DOMAIN ); ?></th>
+                                            <th><?php esc_html_e( 'Price', IMS_TEXT_DOMAIN ); ?></th>
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -358,14 +357,14 @@ if ( ! class_exists( 'IMS_Helper_Functions' ) ) {
                                         if ( $price_adjustment ) {
                                             ?>
                                             <tr class="data-row">
-                                                <td><strong><?php esc_html_e( 'Current Package Adjustment', 'inspiry-memberships' ); ?></strong></td>
+                                                <td><strong><?php esc_html_e( 'Current Package Adjustment', IMS_TEXT_DOMAIN ); ?></strong></td>
                                                 <td><strong>- <?php echo esc_html( self::get_formatted_price( $price_adjustment ) ); ?></strong></td>
                                             </tr>
                                             <?php
                                         }
 										?>
                                         <tr class="total-price">
-                                            <td><strong><?php esc_html_e( 'Total', 'inspiry-memberships' ); ?></strong></td>
+                                            <td><strong><?php esc_html_e( 'Total', IMS_TEXT_DOMAIN ); ?></strong></td>
                                             <td><strong><?php echo esc_html( $total_price ); ?></strong></td>
                                         </tr>
                                         </tbody>
@@ -377,7 +376,7 @@ if ( ! class_exists( 'IMS_Helper_Functions' ) ) {
                         <div class="col-lg-8 order-lg-1">
                             <div class="box">
                                 <div class="box-head">
-                                    <h3 class="box-title"><?php esc_html_e( 'Payment Method', 'inspiry-memberships' ); ?></h3>
+                                    <h3 class="box-title"><?php esc_html_e( 'Payment Method', IMS_TEXT_DOMAIN ); ?></h3>
                                 </div>
                                 <div class="box-body">
 									<?php
@@ -391,7 +390,7 @@ if ( ! class_exists( 'IMS_Helper_Functions' ) ) {
 									if ( ! empty( $wire_settings['ims_wire_enable'] ) && 'on' === $wire_settings['ims_wire_enable'] ) {
 										$payment_methods[] = array(
 											'id'    => 'bank_transfer',
-											'label' => esc_html__( 'Direct Bank Transfer', 'inspiry-memberships' ),
+											'label' => esc_html__( 'Direct Bank Transfer', IMS_TEXT_DOMAIN ),
 										);
 										wp_nonce_field( 'membership-wire-nonce', 'membership_wire_nonce' );
 									}
@@ -400,7 +399,7 @@ if ( ! class_exists( 'IMS_Helper_Functions' ) ) {
 									if ( ! empty( $paypal_settings['ims_paypal_enable'] ) && 'on' === $paypal_settings['ims_paypal_enable'] ) {
 										$payment_methods[] = array(
 											'id'    => 'paypal',
-											'label' => esc_html__( 'PayPal', 'inspiry-memberships' ),
+											'label' => esc_html__( 'PayPal', IMS_TEXT_DOMAIN ),
 										);
 										wp_nonce_field( 'membership-paypal-nonce', 'membership_paypal_nonce' );
 									}
@@ -409,7 +408,7 @@ if ( ! class_exists( 'IMS_Helper_Functions' ) ) {
 									if ( ! empty( $stripe_settings['ims_stripe_enable'] ) && 'on' === $stripe_settings['ims_stripe_enable'] ) {
 										$payment_methods[] = array(
 											'id'    => 'stripe',
-											'label' => esc_html__( 'Stripe', 'inspiry-memberships' ),
+											'label' => esc_html__( 'Stripe', IMS_TEXT_DOMAIN ),
 										);
 									}
 									?>
@@ -461,13 +460,13 @@ if ( ! class_exists( 'IMS_Helper_Functions' ) ) {
 										?>
                                         <div id="ims-recurring-wrap" class="ims-recurring-wrap checkbox-field checkbox-field-white hide">
                                             <input type="checkbox" name="ims_recurring" id="ims_recurring" />
-                                            <label for="ims_recurring"><?php esc_html_e( 'Recurring Payments?', 'inspiry-memberships' ); ?></label>
+                                            <label for="ims_recurring"><?php esc_html_e( 'Recurring Payments?', IMS_TEXT_DOMAIN ); ?></label>
                                         </div>
 										<?php
 										} else {
 											?>
                                             <div id="ims-recurring-wrap" class="ims-recurring-wrap checkbox-field checkbox-field-white hide">
-                                                <p class="note"><?php esc_html_e( 'The "Recurring Payment" option is not available when current package price adjustment is being processed.', 'inspiry-memberships' ); ?></p>
+                                                <p class="note"><?php esc_html_e( 'The "Recurring Payment" option is not available when current package price adjustment is being processed.', IMS_TEXT_DOMAIN ); ?></p>
                                             </div>
                                             <?php
 										}
@@ -509,10 +508,10 @@ if ( ! class_exists( 'IMS_Helper_Functions' ) ) {
 								<?php if ( ! empty( $total_price ) ) { ?>
                                     <div id="ims-stripe-payment-btn" class="<?php echo esc_attr( $stripe_btn_display ); ?>"></div>
                                     <div id="ims-paypal-payment-btn" <?php echo esc_attr( $paypal_btn_display ); ?>></div>
-                                    <button id="ims-bank-transfer-payment-btn" type="button" class="btn btn-primary <?php echo esc_attr( $bank_transfer_btn_display ); ?>"><?php esc_html_e( 'Complete Payment', 'inspiry-memberships' ); ?></button>
+                                    <button id="ims-bank-transfer-payment-btn" type="button" class="btn btn-primary <?php echo esc_attr( $bank_transfer_btn_display ); ?>"><?php esc_html_e( 'Complete Payment', IMS_TEXT_DOMAIN ); ?></button>
 								<?php } else {
 									?>
-                                    <button type="button" class="btn btn-primary" id="ims-free-membership-btn"><?php esc_html_e( 'Subscribe', 'inspiry-memberships' ); ?></button>
+                                    <button type="button" class="btn btn-primary" id="ims-free-membership-btn"><?php esc_html_e( 'Subscribe', IMS_TEXT_DOMAIN ); ?></button>
 									<?php
 								} ?>
 
@@ -543,11 +542,11 @@ if ( ! class_exists( 'IMS_Helper_Functions' ) ) {
                     <input type="hidden" name="order_id" value="" />
                     <input type="hidden" name="redirect" value="<?php echo esc_url( $redirect_url ); ?>" />
 					<?php wp_nonce_field( 'membership-select-nonce', 'membership_select_nonce' ); ?>
-                    <button type="submit" class="btn btn-primary hide" id="ims-submit-order"><?php esc_html_e( 'Complete Payment', 'inspiry-memberships' ); ?></button>
+                    <button type="submit" class="btn btn-primary hide" id="ims-submit-order"><?php esc_html_e( 'Complete Payment', IMS_TEXT_DOMAIN ); ?></button>
                 </form>
 				<?php
 			} else {
-				printf( '<div class="dashboard-no-items"><p><strong>%s</strong></p></div>', esc_html__( 'Invalid Package ID', 'inspiry-memberships' ) );
+				printf( '<div class="dashboard-no-items"><p><strong>%s</strong></p></div>', esc_html__( 'Invalid Package ID', IMS_TEXT_DOMAIN ) );
 			}
 		}
 

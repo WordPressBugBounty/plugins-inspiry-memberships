@@ -44,7 +44,7 @@ if ( ! class_exists( 'IMS_Receipt_Meta_Boxes' ) ) {
 
 			add_meta_box(
 				'receipt-details-metabox',
-				esc_html__( 'Receipt Details', 'inspiry-memberships' ),
+				esc_html__( 'Receipt Details', IMS_TEXT_DOMAIN ),
 				array( $this, 'meta_box_content' ),
 				'ims_receipt',
 				'normal',
@@ -68,31 +68,31 @@ if ( ! class_exists( 'IMS_Receipt_Meta_Boxes' ) ) {
 				<tr valign="top">
 					<th scope="row" valign="top">
 						<label for="receipt_id">
-							<?php esc_html_e( 'Receipt ID', 'inspiry-memberships' ); ?>
+							<?php esc_html_e( 'Receipt ID', IMS_TEXT_DOMAIN ); ?>
 						</label>
 					</th>
 					<td>
 						<?php $receipt_id = get_post_meta( $receipt->ID, 'ims_receipt_receipt_id', true ); ?>
-						<input type="text" name="receipt_id" id="receipt_id" value="<?php echo ! empty( $receipt_id ) ? esc_attr( $receipt_id ) : esc_html__( 'Receipt ID is not generated yet!', 'inspiry-memberships' ); ?>" disabled/>
+						<input type="text" name="receipt_id" id="receipt_id" value="<?php echo ! empty( $receipt_id ) ? esc_attr( $receipt_id ) : esc_html__( 'Receipt ID is not generated yet!', IMS_TEXT_DOMAIN ); ?>" disabled/>
 					</td>
 				</tr>
 
 				<tr valign="top">
 					<th scope="row" valign="top">
 						<label for="receipt_for">
-							<?php esc_html_e( 'Receipt For', 'inspiry-memberships' ); ?>
+							<?php esc_html_e( 'Receipt For', IMS_TEXT_DOMAIN ); ?>
 						</label>
 					</th>
 					<td>
 						<?php $receipt_for = get_post_meta( $receipt->ID, 'ims_receipt_receipt_for', true ); ?>
-						<input type="text" name="receipt_for" id="receipt_for" value="<?php echo ! empty( $receipt_for ) ? esc_attr( $receipt_for ) : esc_html__( 'Data not available!', 'inspiry-memberships' ); ?>" disabled />
+						<input type="text" name="receipt_for" id="receipt_for" value="<?php echo ! empty( $receipt_for ) ? esc_attr( $receipt_for ) : esc_html__( 'Data not available!', IMS_TEXT_DOMAIN ); ?>" disabled />
 					</td>
 				</tr>
 
 				<tr valign="top">
 					<th scope="row" valign="top">
 						<label for="membership">
-							<?php esc_html_e( 'Membership', 'inspiry-memberships' ); ?>
+							<?php esc_html_e( 'Membership', IMS_TEXT_DOMAIN ); ?>
 						</label>
 					</th>
 					<td>
@@ -108,7 +108,7 @@ if ( ! class_exists( 'IMS_Receipt_Meta_Boxes' ) ) {
 				<tr valign="top">
 					<th scope="row" valign="top">
 						<label for="membership_id">
-							<?php esc_html_e( 'Membership ID', 'inspiry-memberships' ); ?>
+							<?php esc_html_e( 'Membership ID', IMS_TEXT_DOMAIN ); ?>
 						</label>
 					</th>
 					<td>
@@ -119,7 +119,7 @@ if ( ! class_exists( 'IMS_Receipt_Meta_Boxes' ) ) {
 				<tr valign="top">
 					<th scope="row" valign="top">
 						<label for="price">
-							<?php esc_html_e( 'Price', 'inspiry-memberships' ); ?>
+							<?php esc_html_e( 'Price', IMS_TEXT_DOMAIN ); ?>
 						</label>
 					</th>
 					<td>
@@ -130,19 +130,19 @@ if ( ! class_exists( 'IMS_Receipt_Meta_Boxes' ) ) {
 				<tr valign="top">
 					<th scope="row" valign="top">
 						<label for="purchase_date">
-							<?php esc_html_e( 'Date of Purchase', 'inspiry-memberships' ); ?>
+							<?php esc_html_e( 'Date of Purchase', IMS_TEXT_DOMAIN ); ?>
 						</label>
 					</th>
 					<td>
 						<input type="text" name="purchase_date" id="purchase_date" placeholder="Date of Purchase" value="<?php echo esc_attr( get_post_meta( $receipt->ID, 'ims_receipt_purchase_date', true ) ); ?>" />
-						<p class="description"><?php esc_html_e( 'Format: YYYY-MM-DD H:M:S', 'inspiry-memberships' ); ?></p>
+						<p class="description"><?php esc_html_e( 'Format: YYYY-MM-DD H:M:S', IMS_TEXT_DOMAIN ); ?></p>
 					</td>
 				</tr>
 
 				<tr valign="top">
 					<th scope="row" valign="top">
 						<label for="user_id">
-							<?php esc_html_e( 'User ID', 'inspiry-memberships' ); ?>
+							<?php esc_html_e( 'User ID', IMS_TEXT_DOMAIN ); ?>
 						</label>
 					</th>
 					<td>
@@ -153,26 +153,26 @@ if ( ! class_exists( 'IMS_Receipt_Meta_Boxes' ) ) {
 				<tr valign="top">
 					<th scope="row" valign="top">
 						<label for="user_id">
-							<?php esc_html_e( 'Vendor', 'inspiry-memberships' ); ?>
+							<?php esc_html_e( 'Vendor', IMS_TEXT_DOMAIN ); ?>
 						</label>
 					</th>
 					<td>
 						<?php $vendor = get_post_meta( $receipt->ID, 'ims_receipt_vendor', true ); ?>
 						<select	name="vendor" id="vendor">
 							<option value="" <?php echo ( '' === $vendor ) ? 'selected' : ''; ?> disabled>
-								<?php esc_html_e( 'None', 'inspiry-memberships' ); ?>
+								<?php esc_html_e( 'None', IMS_TEXT_DOMAIN ); ?>
 							</option>
 							<option value="stripe" <?php echo ( 'stripe' === $vendor ) ? 'selected' : ''; ?> >
-								<?php esc_html_e( 'Stripe', 'inspiry-memberships' ); ?>
+								<?php esc_html_e( 'Stripe', IMS_TEXT_DOMAIN ); ?>
 							</option>
 							<option value="paypal" <?php echo ( 'paypal' === $vendor ) ? 'selected' : ''; ?> >
-								<?php esc_html_e( 'PayPal', 'inspiry-memberships' ); ?>
+								<?php esc_html_e( 'PayPal', IMS_TEXT_DOMAIN ); ?>
 							</option>
 							<option value="wire" <?php echo ( 'wire' === $vendor ) ? 'selected' : ''; ?> >
-								<?php esc_html_e( 'Wire Transfer', 'inspiry-memberships' ); ?>
+								<?php esc_html_e( 'Wire Transfer', IMS_TEXT_DOMAIN ); ?>
 							</option>
 							<option value="woocommerce" <?php echo ( 'woocommerce' === $vendor ) ? 'selected' : ''; ?> >
-								<?php esc_html_e( 'WooCommerce', 'inspiry-memberships' ); ?>
+								<?php esc_html_e( 'WooCommerce', IMS_TEXT_DOMAIN ); ?>
 							</option>
 						</select>
 					</td>
@@ -181,7 +181,7 @@ if ( ! class_exists( 'IMS_Receipt_Meta_Boxes' ) ) {
 				<tr valign="top">
 					<th scope="row" valign="top">
 						<label for="payment_id">
-							<?php esc_html_e( 'Payment ID', 'inspiry-memberships' ); ?>
+							<?php esc_html_e( 'Payment ID', IMS_TEXT_DOMAIN ); ?>
 						</label>
 					</th>
 					<td>
@@ -192,7 +192,7 @@ if ( ! class_exists( 'IMS_Receipt_Meta_Boxes' ) ) {
 				<tr valign="top">
 					<th scope="row" valign="top">
 						<label for="status">
-							<?php esc_html_e( 'Membership Status', 'inspiry-memberships' ); ?>
+							<?php esc_html_e( 'Membership Status', IMS_TEXT_DOMAIN ); ?>
 						</label>
 					</th>
 					<td>
@@ -210,17 +210,17 @@ if ( ! class_exists( 'IMS_Receipt_Meta_Boxes' ) ) {
 						if ( empty( $status ) ) {
 							?>
 							<input type="checkbox" name="status" id="status" value="on" />
-							<label class="description" for="status"><?php esc_html_e( 'Activate membership!', 'inspiry-memberships' ); ?></label>
+							<label class="description" for="status"><?php esc_html_e( 'Activate membership!', IMS_TEXT_DOMAIN ); ?></label>
 							<?php
 						} elseif ( $status && ( $current_membership_id !== $receipt_membership_id ) || ( $current_membership_due_date !== $receipt_membership_due_date ) ) {
 							?>
 							<input type="hidden" name="status" id="status" value="expired" />
-							<p class="description"><?php esc_html_e( 'Membership expired.', 'inspiry-memberships' ); ?></p>
+							<p class="description"><?php esc_html_e( 'Membership expired.', IMS_TEXT_DOMAIN ); ?></p>
 							<?php
 						} else {
 							?>
 							<input type="hidden" name="status" id="status" value="active" />
-							<p class="description"><?php esc_html_e( 'Membership is active.', 'inspiry-memberships' ); ?></p>
+							<p class="description"><?php esc_html_e( 'Membership is active.', IMS_TEXT_DOMAIN ); ?></p>
 						<?php } ?>
 					</td>
 				</tr>
@@ -230,11 +230,11 @@ if ( ! class_exists( 'IMS_Receipt_Meta_Boxes' ) ) {
 					?>
 					<tr valign="top">
 						<th scope="row" valign="top">
-							<label for="cancel_membership"><?php esc_html_e( 'Cancel Wire Transfer Membership?', 'inspiry-memberships' ); ?></label>
+							<label for="cancel_membership"><?php esc_html_e( 'Cancel Wire Transfer Membership?', IMS_TEXT_DOMAIN ); ?></label>
 						</th>
 						<td>
 							<input type="checkbox" name="cancel_membership" id="cancel_membership" />
-							<label class="description" for="cancel_membership"><?php esc_html_e( 'Yes!', 'inspiry-memberships' ); ?></label>
+							<label class="description" for="cancel_membership"><?php esc_html_e( 'Yes!', IMS_TEXT_DOMAIN ); ?></label>
 						</td>
 					</tr>
 					<?php

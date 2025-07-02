@@ -135,7 +135,7 @@ if ( ! class_exists( 'IMS_PayPal_Payment_Handler' ) ) :
 			if ( ! isset( $_POST['nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['nonce'] ) ), 'membership-paypal-nonce' ) ) {
 				echo wp_json_encode( array(
 					'success' => false,
-					'message' => esc_html__( 'Security verification failed, please refresh the page and try again.', 'inspiry-memberships' ),
+					'message' => esc_html__( 'Security verification failed, please refresh the page and try again.', IMS_TEXT_DOMAIN ),
 				) );
 				die();
 			}
@@ -143,7 +143,7 @@ if ( ! class_exists( 'IMS_PayPal_Payment_Handler' ) ) :
 			if ( ! isset( $_POST['membership_id'] ) ) {
 				echo wp_json_encode( array(
 					'success' => false,
-					'message' => esc_html__( 'Please select a membership to continue.', 'inspiry-memberships' ),
+					'message' => esc_html__( 'Please select a membership to continue.', IMS_TEXT_DOMAIN ),
 				) );
 				die();
 			}
@@ -206,7 +206,7 @@ if ( ! class_exists( 'IMS_PayPal_Payment_Handler' ) ) :
 
 				// Check for errors in the API request
 				if ( is_wp_error( $response ) ) {
-					die( esc_html__( 'Error: ', 'inspiry-memberships' ) . $response->get_error_message() );
+					die( esc_html__( 'Error: ', IMS_TEXT_DOMAIN ) . $response->get_error_message() );
 				}
 
 				// Decode the JSON response
@@ -218,7 +218,7 @@ if ( ! class_exists( 'IMS_PayPal_Payment_Handler' ) ) :
 					die( $data['id'] ); // Return the order ID
 				} else {
 					// Handle the case where order creation failed
-					die( esc_html__( 'Error: Unable to create PayPal order for the property.', 'inspiry-memberships' ) );
+					die( esc_html__( 'Error: Unable to create PayPal order for the property.', IMS_TEXT_DOMAIN ) );
 				}
 			}
 			die();
@@ -254,7 +254,7 @@ if ( ! class_exists( 'IMS_PayPal_Payment_Handler' ) ) :
 
 			// Check for errors in the API request
 			if ( is_wp_error( $response ) ) {
-				die( esc_html__( 'Error: ', 'inspiry-memberships' ) . $response->get_error_message() );
+				die( esc_html__( 'Error: ', IMS_TEXT_DOMAIN ) . $response->get_error_message() );
 			}
 
 			// Decode the JSON response
@@ -266,7 +266,7 @@ if ( ! class_exists( 'IMS_PayPal_Payment_Handler' ) ) :
 				return $data['access_token'];
 			} else {
 				// Handle the case where access token retrieval failed
-				die( esc_html__( 'Error: Unable to retrieve access token', 'inspiry-memberships' ) );
+				die( esc_html__( 'Error: Unable to retrieve access token', IMS_TEXT_DOMAIN ) );
 			}
 		}
 

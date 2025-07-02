@@ -114,13 +114,13 @@ if ( ! class_exists( 'IMS_Payment_Handler' ) ) :
 						$response = array(
 							'success'  => true,
 							'order_id' => $receipt_id,
-							'message'  => esc_html__( 'Order Completed Successfully!', 'inspiry-memberships' ),
+							'message'  => esc_html__( 'Order Completed Successfully!', IMS_TEXT_DOMAIN ),
 						);
 					} else {
 						$response = array(
 							'success'  => false,
 							'order_id' => '',
-							'message'  => esc_html__( 'Error occurred while processing order.', 'inspiry-memberships' ),
+							'message'  => esc_html__( 'Error occurred while processing order.', IMS_TEXT_DOMAIN ),
 						);
 					}
 

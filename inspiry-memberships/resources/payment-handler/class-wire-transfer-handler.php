@@ -64,7 +64,7 @@ if ( ! class_exists( 'IMS_Wire_Transfer_Handler' ) ) :
 					echo wp_json_encode(
 						array(
 							'success' => false,
-							'message' => esc_html__( 'Please select a membership to continue.', 'inspiry-memberships' ),
+							'message' => esc_html__( 'Please select a membership to continue.', IMS_TEXT_DOMAIN ),
 						)
 					);
 					die();
@@ -79,31 +79,31 @@ if ( ! class_exists( 'IMS_Wire_Transfer_Handler' ) ) :
 				$receipt_id      = $receipt_methods->generate_wire_transfer_receipt( $user_id, $membership_id, false );
 
 				// Membership Receipt Mail to the Subscriber.
-				$subject = esc_html__( 'Membership Receipt Information', 'inspiry-memberships' ) . ' - ' . get_bloginfo( 'name' );
+				$subject = esc_html__( 'Membership Receipt Information', IMS_TEXT_DOMAIN ) . ' - ' . get_bloginfo( 'name' );
 				/* translators: %s: membership title */
-				$message = sprintf( esc_html__( 'You have successfully applied for the %s membership package on our site.', 'inspiry-memberships' ), '<strong>' . $membership_title . '</strong>' ) . '<br/><br/>';
-				$message .= sprintf( esc_html__( 'You chose to pay via Wire Transfer. Please send a payment of %s to the following account.', 'inspiry-memberships' ), $formatted_price ) . '<br/><br/>';
+				$message = sprintf( esc_html__( 'You have successfully applied for the %s membership package on our site.', IMS_TEXT_DOMAIN ), '<strong>' . $membership_title . '</strong>' ) . '<br/><br/>';
+				$message .= sprintf( esc_html__( 'You chose to pay via Wire Transfer. Please send a payment of %s to the following account.', IMS_TEXT_DOMAIN ), $formatted_price ) . '<br/><br/>';
 
 				$wire_settings = get_option( 'ims_wire_settings' );
 				if ( ! empty( $wire_settings['ims_wire_account_name'] ) && ! empty( $wire_settings['ims_wire_account_number'] ) ) {
-					$message .= sprintf( esc_html__( 'Account Name: %s', 'inspiry-memberships' ), esc_html( $wire_settings['ims_wire_account_name'] ) ) . '<br/>';
-					$message .= sprintf( esc_html__( 'Account Number: %s', 'inspiry-memberships' ), esc_html( $wire_settings['ims_wire_account_number'] ) ) . '<br/><br/>';
+					$message .= sprintf( esc_html__( 'Account Name: %s', IMS_TEXT_DOMAIN ), esc_html( $wire_settings['ims_wire_account_name'] ) ) . '<br/>';
+					$message .= sprintf( esc_html__( 'Account Number: %s', IMS_TEXT_DOMAIN ), esc_html( $wire_settings['ims_wire_account_number'] ) ) . '<br/><br/>';
 				}
 
-				$message .= sprintf( esc_html__( 'After sending the payment, notify us at %1$s and include your receipt %2$s number.', 'inspiry-memberships' ), $admin_email, '<strong>' . $receipt_id . '</strong>' ) . '<br/><br/>';
-				$message .= esc_html__( 'We will activate your membership as soon as we get your payment confirmation.', 'inspiry-memberships' ) . '<br/><br/>';
+				$message .= sprintf( esc_html__( 'After sending the payment, notify us at %1$s and include your receipt %2$s number.', IMS_TEXT_DOMAIN ), $admin_email, '<strong>' . $receipt_id . '</strong>' ) . '<br/><br/>';
+				$message .= esc_html__( 'We will activate your membership as soon as we get your payment confirmation.', IMS_TEXT_DOMAIN ) . '<br/><br/>';
 
 				if ( is_email( $admin_email ) ) {
-					$message .= esc_html__( 'For any further assistance, email us at', 'inspiry-memberships' ) . ' ' . $admin_email;
+					$message .= esc_html__( 'For any further assistance, email us at', IMS_TEXT_DOMAIN ) . ' ' . $admin_email;
 
 					if ( ! empty( $header_phone ) ) {
-						$message .= esc_html__( ' OR call us at ', 'inspiry-memberships' ) . ' ' . $header_phone;
+						$message .= esc_html__( ' OR call us at ', IMS_TEXT_DOMAIN ) . ' ' . $header_phone;
 					}
 
 					$message .= '<br/><br/>';
 				}
 
-				$message .= esc_html__( 'Regards', 'inspiry-memberships' );
+				$message .= esc_html__( 'Regards', IMS_TEXT_DOMAIN );
 
 				$message = apply_filters( 'ims_membership_receipt_email_message', $message, $user_id, $membership_id, $receipt_id );
 
@@ -112,10 +112,10 @@ if ( ! class_exists( 'IMS_Wire_Transfer_Handler' ) ) :
 
 					// Membership Receipt Mail to the Admin.
 					if ( is_email( $admin_email ) ) {
-						$subject = esc_html__( 'New Membership Receipt Received', 'inspiry-memberships' ) . ' - ' . get_bloginfo( 'name' );
+						$subject = esc_html__( 'New Membership Receipt Received', IMS_TEXT_DOMAIN ) . ' - ' . get_bloginfo( 'name' );
 						/* translators: %1$s: membership title, %2$s: reciept formatted price */
-						$message = sprintf( esc_html__( 'You have received a %1$s membership receipt for the payment of %2$s from User ID #%3$s having email address %4$s', 'inspiry-memberships' ), '<strong>' . $membership_title . '</strong>', '<strong>' . $formatted_price . '</strong>', '<strong>' . $user_id . '</strong>', $user_email ) . '<br/><br/>';
-						$message .= sprintf( esc_html__( 'User chose to pay via Wire Transfer. Make sure to activate the membership receipt number %1$s as soon as you get the payment confirmation via email at %2$s', 'inspiry-memberships' ), '<strong>' . $receipt_id . '</strong>', $admin_email ) . '<br/><br/>';
+						$message = sprintf( esc_html__( 'You have received a %1$s membership receipt for the payment of %2$s from User ID #%3$s having email address %4$s', IMS_TEXT_DOMAIN ), '<strong>' . $membership_title . '</strong>', '<strong>' . $formatted_price . '</strong>', '<strong>' . $user_id . '</strong>', $user_email ) . '<br/><br/>';
+						$message .= sprintf( esc_html__( 'User chose to pay via Wire Transfer. Make sure to activate the membership receipt number %1$s as soon as you get the payment confirmation via email at %2$s', IMS_TEXT_DOMAIN ), '<strong>' . $receipt_id . '</strong>', $admin_email ) . '<br/><br/>';
 						$message = apply_filters( 'ims_membership_receipt_email_message_admin', $message, $user_id, $membership_id, $receipt_id );
 
 						IMS_Email::send_email( $admin_email, $subject, $message );
@@ -124,7 +124,7 @@ if ( ! class_exists( 'IMS_Wire_Transfer_Handler' ) ) :
 					echo wp_json_encode(
 						array(
 							'success' => false,
-							'message' => esc_html__( 'Your email address is not valid.', 'inspiry-memberships' ),
+							'message' => esc_html__( 'Your email address is not valid.', IMS_TEXT_DOMAIN ),
 						)
 					);
 					die();
@@ -136,13 +136,13 @@ if ( ! class_exists( 'IMS_Wire_Transfer_Handler' ) ) :
 					$response = array(
 						'success'  => true,
 						'order_id' => $receipt_id,
-						'message'  => esc_html__( 'Email sent successfully.', 'inspiry-memberships' ),
+						'message'  => esc_html__( 'Email sent successfully.', IMS_TEXT_DOMAIN ),
 					);
 				} else {
 					$response = array(
 						'success'  => false,
 						'order_id' => '',
-						'message'  => esc_html__( 'Error occurred while sending email.', 'inspiry-memberships' ),
+						'message'  => esc_html__( 'Error occurred while sending email.', IMS_TEXT_DOMAIN ),
 					);
 				}
 
@@ -151,13 +151,13 @@ if ( ! class_exists( 'IMS_Wire_Transfer_Handler' ) ) :
 						$response = array(
 							'success'  => true,
 							'order_id' => $receipt_id,
-							'message'  => esc_html__( 'Order Completed Successfully!', 'inspiry-memberships' ),
+							'message'  => esc_html__( 'Order Completed Successfully!', IMS_TEXT_DOMAIN ),
 						);
 					} else {
 						$response = array(
 							'success'  => false,
 							'order_id' => '',
-							'message'  => esc_html__( 'Error occurred while processing order.', 'inspiry-memberships' ),
+							'message'  => esc_html__( 'Error occurred while processing order.', IMS_TEXT_DOMAIN ),
 						);
 					}
 				}

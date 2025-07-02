@@ -21,29 +21,29 @@ $ims_wire_settings_arr = apply_filters(
 		array(
 			'id'   => 'ims_wire_enable',
 			'type' => 'checkbox',
-			'name' => esc_html__( 'Enable Wire Transfer', 'inspiry-memberships' ),
-			'desc' => esc_html__( 'Check this to enable wire transfer.', 'inspiry-memberships' ),
+			'name' => esc_html__( 'Enable Wire Transfer', IMS_TEXT_DOMAIN ),
+			'desc' => esc_html__( 'Check this to enable wire transfer.', IMS_TEXT_DOMAIN ),
 		),
 		array(
 			'id'      => 'ims_wire_transfer_instructions',
 			'type'    => 'textarea',
-			'name'    => esc_html__( 'Instructions for Wire Transfer', 'inspiry-memberships' ),
-			'desc'    => esc_html__( 'Enter the instructions for wire transfer.', 'inspiry-memberships' ),
+			'name'    => esc_html__( 'Instructions for Wire Transfer', IMS_TEXT_DOMAIN ),
+			'desc'    => esc_html__( 'Enter the instructions for wire transfer.', IMS_TEXT_DOMAIN ),
 			'default' => 'Please include the following information on all wire transfers to our bank account and use your order ID as the payment reference.',
 		),
 		array(
 			'id'      => 'ims_wire_account_name',
 			'type'    => 'text',
-			'name'    => esc_html__( 'Account Name', 'inspiry-memberships' ),
-			'desc'    => esc_html__( 'Enter your account name.', 'inspiry-memberships' ),
+			'name'    => esc_html__( 'Account Name', IMS_TEXT_DOMAIN ),
+			'desc'    => esc_html__( 'Enter your account name.', IMS_TEXT_DOMAIN ),
 			'default' => esc_html( get_bloginfo( 'name' ) ),
 		),
 		array(
 			'id'      => 'ims_wire_account_number',
 			'type'    => 'text',
-			'name'    => esc_html__( 'Account Number', 'inspiry-memberships' ),
-			'desc'    => esc_html__( 'Enter your account number.', 'inspiry-memberships' ),
-			'default' => esc_html__( '1111-2222-33333-44-5', 'inspiry-memberships' ),
+			'name'    => esc_html__( 'Account Number', IMS_TEXT_DOMAIN ),
+			'desc'    => esc_html__( 'Enter your account number.', IMS_TEXT_DOMAIN ),
+			'default' => esc_html__( '1111-2222-33333-44-5', IMS_TEXT_DOMAIN ),
 		),
 	)
 );

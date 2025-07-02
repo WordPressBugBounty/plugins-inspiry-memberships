@@ -185,7 +185,7 @@ if ( ! class_exists( 'IMS_Stripe_Payment_Handler' ) ) :
 					$ims_stripe_settings = get_option( 'ims_stripe_settings' );
 
 					// Strip button label.
-					$ims_button_label = esc_html__( 'Pay with Card', 'inspiry-memberships' );
+					$ims_button_label = esc_html__( 'Pay with Card', IMS_TEXT_DOMAIN );
 					if ( ! empty( $ims_stripe_settings['ims_stripe_btn_label'] ) ) {
 						$ims_button_label = $ims_stripe_settings['ims_stripe_btn_label'];
 					}
@@ -211,7 +211,7 @@ if ( ! class_exists( 'IMS_Stripe_Payment_Handler' ) ) :
 					echo wp_json_encode(
 						array(
 							'success' => false,
-							'message' => esc_html__( 'Membership ID is empty.', 'inspiry-memberships' ),
+							'message' => esc_html__( 'Membership ID is empty.', IMS_TEXT_DOMAIN ),
 						)
 					);
 				}
@@ -219,7 +219,7 @@ if ( ! class_exists( 'IMS_Stripe_Payment_Handler' ) ) :
 				echo wp_json_encode(
 					array(
 						'success' => false,
-						'message' => esc_html__( 'Membership ID is not valid.', 'inspiry-memberships' ),
+						'message' => esc_html__( 'Membership ID is not valid.', IMS_TEXT_DOMAIN ),
 					)
 				);
 			}

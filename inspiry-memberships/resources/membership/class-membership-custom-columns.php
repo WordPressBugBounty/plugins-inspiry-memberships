@@ -35,11 +35,11 @@ if ( ! class_exists( 'IMS_Membership_Custom_Columns' ) ) :
 				'ims_membership_custom_column_name',
 				array(
 					'cb'         => '<input type="checkbox" />',
-					'title'      => esc_html__( 'Membership Title', 'inspiry-memberships' ),
-					'properties' => esc_html__( 'Allowed Properties', 'inspiry-memberships' ),
-					'featured'   => esc_html__( 'Featured Properties', 'inspiry-memberships' ),
-					'price'      => esc_html__( 'Price', 'inspiry-memberships' ),
-					'duration'   => esc_html__( 'Billing Period', 'inspiry-memberships' ),
+					'title'      => esc_html__( 'Membership Title', IMS_TEXT_DOMAIN ),
+					'properties' => esc_html__( 'Allowed Properties', IMS_TEXT_DOMAIN ),
+					'featured'   => esc_html__( 'Featured Properties', IMS_TEXT_DOMAIN ),
+					'price'      => esc_html__( 'Price', IMS_TEXT_DOMAIN ),
+					'duration'   => esc_html__( 'Billing Period', IMS_TEXT_DOMAIN ),
 				)
 			);
 
@@ -74,7 +74,7 @@ if ( ! class_exists( 'IMS_Membership_Custom_Columns' ) ) :
 					if ( ! empty( $properties ) ) {
 						echo esc_html( $properties );
 					} else {
-						esc_html_e( 'Not Available', 'inspiry-memberships' );
+						esc_html_e( 'Not Available', IMS_TEXT_DOMAIN );
 					}
 					break;
 
@@ -83,7 +83,7 @@ if ( ! class_exists( 'IMS_Membership_Custom_Columns' ) ) :
 					if ( ! empty( $featured ) ) {
 						echo esc_html( $featured );
 					} else {
-						esc_html_e( 'Not Available', 'inspiry-memberships' );
+						esc_html_e( 'Not Available', IMS_TEXT_DOMAIN );
 					}
 					break;
 
@@ -106,7 +106,7 @@ if ( ! class_exists( 'IMS_Membership_Custom_Columns' ) ) :
 					if ( ! empty( $price ) ) {
 						echo esc_html( $price );
 					} else {
-						esc_html_e( 'Free', 'inspiry-memberships' );
+						esc_html_e( 'Free', IMS_TEXT_DOMAIN );
 					}
 					break;
 
@@ -118,7 +118,7 @@ if ( ! class_exists( 'IMS_Membership_Custom_Columns' ) ) :
 					} elseif ( ! empty( $duration ) && ( $duration == 1 ) ) {
 						echo esc_html( $duration . ' ' . rtrim( $duration_unit, 's' ) );
 					} else {
-						esc_html_e( 'Not Available', 'inspiry-memberships' );
+						esc_html_e( 'Not Available', IMS_TEXT_DOMAIN );
 					}
 					break;
 

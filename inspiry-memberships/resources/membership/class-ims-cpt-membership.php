@@ -35,22 +35,22 @@ if ( ! class_exists( 'IMS_CPT_Membership' ) ) :
 			}
 
 			$labels = array(
-				'name'               => esc_html__( 'Memberships', 'inspiry-memberships' ),
-				'singular_name'      => esc_html__( 'Membership', 'inspiry-memberships' ),
-				'add_new'            => esc_html_x( 'Add New Membership', 'inspiry-memberships', 'inspiry-memberships' ),
-				'add_new_item'       => esc_html__( 'Add New Membership', 'inspiry-memberships' ),
-				'edit_item'          => esc_html__( 'Edit Membership', 'inspiry-memberships' ),
-				'new_item'           => esc_html__( 'New Membership', 'inspiry-memberships' ),
-				'view_item'          => esc_html__( 'View Membership', 'inspiry-memberships' ),
-				'search_items'       => esc_html__( 'Search Memberships', 'inspiry-memberships' ),
-				'not_found'          => esc_html__( 'No Memberships found', 'inspiry-memberships' ),
-				'not_found_in_trash' => esc_html__( 'No Memberships found in Trash', 'inspiry-memberships' ),
-				'parent_item_colon'  => esc_html__( 'Parent Membership:', 'inspiry-memberships' ),
-				'menu_name'          => esc_html__( 'Memberships', 'inspiry-memberships' ),
+				'name'               => esc_html__( 'Memberships', IMS_TEXT_DOMAIN ),
+				'singular_name'      => esc_html__( 'Membership', IMS_TEXT_DOMAIN ),
+				'add_new'            => esc_html__( 'Add New Membership', IMS_TEXT_DOMAIN ),
+				'add_new_item'       => esc_html__( 'Add New Membership', IMS_TEXT_DOMAIN ),
+				'edit_item'          => esc_html__( 'Edit Membership', IMS_TEXT_DOMAIN ),
+				'new_item'           => esc_html__( 'New Membership', IMS_TEXT_DOMAIN ),
+				'view_item'          => esc_html__( 'View Membership', IMS_TEXT_DOMAIN ),
+				'search_items'       => esc_html__( 'Search Memberships', IMS_TEXT_DOMAIN ),
+				'not_found'          => esc_html__( 'No Memberships found', IMS_TEXT_DOMAIN ),
+				'not_found_in_trash' => esc_html__( 'No Memberships found in Trash', IMS_TEXT_DOMAIN ),
+				'parent_item_colon'  => esc_html__( 'Parent Membership:', IMS_TEXT_DOMAIN ),
+				'menu_name'          => esc_html__( 'Memberships', IMS_TEXT_DOMAIN ),
 			);
 
 			$rewrite = array(
-				'slug'       => apply_filters( 'ims_membership_post_type_slug', esc_html__( 'membership', 'inspiry-memberships' ) ),
+				'slug'       => apply_filters( 'ims_membership_post_type_slug', esc_html__( 'membership', IMS_TEXT_DOMAIN ) ),
 				'with_front' => true,
 				'pages'      => true,
 				'feeds'      => true,
@@ -59,7 +59,7 @@ if ( ! class_exists( 'IMS_CPT_Membership' ) ) :
 			$args = array(
 				'labels'              => apply_filters( 'ims_membership_post_type_labels', $labels ),
 				'hierarchical'        => false,
-				'description'         => esc_html__( 'Represents a membership package.', 'inspiry-memberships' ),
+				'description'         => esc_html__( 'Represents a membership package.', IMS_TEXT_DOMAIN ),
 				'public'              => false,
 				'exclude_from_search' => true,
 				'show_ui'             => true,
@@ -97,11 +97,11 @@ if ( ! class_exists( 'IMS_CPT_Membership' ) ) :
 		public function modify_excerpt_field_labels( $translation, $original ) {
 			if ( get_post_type() == 'ims_membership' ) {
 				if ( 'Excerpt' === $original ) {
-					return esc_html__( 'Package Short Description', 'inspiry-memberships' );
+					return esc_html__( 'Package Short Description', IMS_TEXT_DOMAIN );
 				} else {
 					$pos = strpos( $original, 'Excerpts are optional hand-crafted summaries of your' );
 					if ( $pos !== false ) {
-						return esc_html__( 'Add a short description for the Package to guide users.', 'inspiry-memberships' );
+						return esc_html__( 'Add a short description for the Package to guide users.', IMS_TEXT_DOMAIN );
 					}
 				}
 			}
@@ -120,17 +120,17 @@ if ( ! class_exists( 'IMS_CPT_Membership' ) ) :
 
 			$schedules['weekly'] = array(
 				'interval' => 7 * 24 * 60 * 60, // 7 days * 24 hours * 60 minutes * 60 seconds
-				'display'  => esc_html__( 'Once Weekly', 'inspiry-memberships' ),
+				'display'  => esc_html__( 'Once Weekly', IMS_TEXT_DOMAIN ),
 			);
 
 			$schedules['monthly'] = array(
 				'interval' => 30 * 24 * 60 * 60, // 30 days * 24 hours * 60 minutes * 60 seconds
-				'display'  => esc_html__( 'Once Monthly', 'inspiry-memberships' ),
+				'display'  => esc_html__( 'Once Monthly', IMS_TEXT_DOMAIN ),
 			);
 
 			$schedules['yearly'] = array(
 				'interval' => 365 * 24 * 60 * 60, // 365 days * 24 hours * 60 minutes * 60 seconds
-				'display'  => esc_html__( 'Once Yearly', 'inspiry-memberships' ),
+				'display'  => esc_html__( 'Once Yearly', IMS_TEXT_DOMAIN ),
 			);
 
 			return apply_filters( 'ims_create_crons_scedules', $schedules );

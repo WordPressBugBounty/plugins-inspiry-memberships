@@ -21,14 +21,14 @@ $ims_basic_settings_arr = apply_filters(
 		array(
 			'id'   => 'ims_memberships_enable',
 			'type' => 'checkbox',
-			'name' => esc_html__( 'Enable Memberships', 'inspiry-memberships' ),
-			'desc' => esc_html__( 'Check this to enable memberships on your website.', 'inspiry-memberships' ),
+			'name' => esc_html__( 'Enable Memberships', IMS_TEXT_DOMAIN ),
+			'desc' => esc_html__( 'Check this to enable memberships on your website.', IMS_TEXT_DOMAIN ),
 		),
 		array(
 			'id'      => 'ims_payment_method',
 			'type'    => 'select',
-			'name'    => esc_html__( 'Payments Gateway Type', 'inspiry-memberships' ),
-			'desc'    => sprintf( esc_html__( 'If you choose "Custom" method, then you can use any individual direct payment methods such as Stripe, PayPal and WireTransfer. %3$sChoosing WooCommerce will allow you to use any WooCommerce supported payment method. For more details please check its documentation %1$sPayments Settings%2$s section.', 'inspiry-memberships' ), '<a href="https://docs.woocommerce.com/document/configuring-woocommerce-settings/" target="_blank">', '</a>', '<br>' ),
+			'name'    => esc_html__( 'Payments Gateway Type', IMS_TEXT_DOMAIN ),
+			'desc'    => sprintf( esc_html__( 'If you choose "Custom" method, then you can use any individual direct payment methods such as Stripe, PayPal and WireTransfer. %3$sChoosing WooCommerce will allow you to use any WooCommerce supported payment method. For more details please check its documentation %1$sPayments Settings%2$s section.', IMS_TEXT_DOMAIN ), '<a href="https://docs.woocommerce.com/document/configuring-woocommerce-settings/" target="_blank">', '</a>', '<br>' ),
 			'default' => 'custom',
 			'options' => array(
 				'custom'      => 'Custom',
@@ -38,40 +38,40 @@ $ims_basic_settings_arr = apply_filters(
 		array(
 			'id'   => 'ims_adjust_current_amount',
 			'type' => 'checkbox',
-			'name' => esc_html__( 'Allow to adjust current package amount', 'inspiry-memberships' ),
-			'desc' => sprintf(esc_html__( 'After enabling this option, if a user already has a membership package, the price will be automatically adjusted based on the remaining days. %1$sIf the newly selected package has a lower price than the price difference, the package will be changed without any additional cost to the user.', 'inspiry-memberships' ), '<br>'),
+			'name' => esc_html__( 'Allow to adjust current package amount', IMS_TEXT_DOMAIN ),
+			'desc' => sprintf(esc_html__( 'After enabling this option, if a user already has a membership package, the price will be automatically adjusted based on the remaining days. %1$sIf the newly selected package has a lower price than the price difference, the package will be changed without any additional cost to the user.', IMS_TEXT_DOMAIN ), '<br>'),
 		),
 		array(
 			'id'      => 'ims_adjustment_amount_offset',
 			'type'    => 'text',
-			'name'    => esc_html__( 'Additional Fee on Package Change', 'inspiry-memberships' ),
-			'desc'    => esc_html__( 'Specify a numeric value to deduct as an extra fee when changing package.', 'inspiry-memberships' )
+			'name'    => esc_html__( 'Additional Fee on Package Change', IMS_TEXT_DOMAIN ),
+			'desc'    => esc_html__( 'Specify a numeric value to deduct as an extra fee when changing package.', IMS_TEXT_DOMAIN )
 		),
 		array(
 			'id'   => 'ims_recurring_memberships_enable',
 			'type' => 'checkbox',
-			'name' => esc_html__( 'Enable Recurring Memberships', 'inspiry-memberships' ),
-			'desc' => esc_html__( 'Check this to enable recurring memberships on your website. It is available only for "Custom" Payment Method because WooCommerce does not support recurring payments.', 'inspiry-memberships' ),
+			'name' => esc_html__( 'Enable Recurring Memberships', IMS_TEXT_DOMAIN ),
+			'desc' => esc_html__( 'Check this to enable recurring memberships on your website. It is available only for "Custom" Payment Method because WooCommerce does not support recurring payments.', IMS_TEXT_DOMAIN ),
 		),
 		array(
 			'id'      => 'ims_currency_code',
 			'type'    => 'text',
-			'name'    => esc_html__( 'Currency Code', 'inspiry-memberships' ),
-			'desc'    => esc_html__( 'Provide currency code that you want to use. Example: USD', 'inspiry-memberships' ),
+			'name'    => esc_html__( 'Currency Code', IMS_TEXT_DOMAIN ),
+			'desc'    => esc_html__( 'Provide currency code that you want to use. Example: USD', IMS_TEXT_DOMAIN ),
 			'default' => 'USD',
 		),
 		array(
 			'id'      => 'ims_currency_symbol',
 			'type'    => 'text',
-			'name'    => esc_html__( 'Currency Symbol', 'inspiry-memberships' ),
-			'desc'    => esc_html__( 'Provide currency symbol that you want to use. Example: $', 'inspiry-memberships' ),
+			'name'    => esc_html__( 'Currency Symbol', IMS_TEXT_DOMAIN ),
+			'desc'    => esc_html__( 'Provide currency symbol that you want to use. Example: $', IMS_TEXT_DOMAIN ),
 			'default' => '$',
 		),
 		array(
 			'id'      => 'ims_currency_position',
 			'type'    => 'select',
-			'name'    => esc_html__( 'Currency Symbol Position', 'inspiry-memberships' ),
-			'desc'    => esc_html__( 'Default: Before', 'inspiry-memberships' ),
+			'name'    => esc_html__( 'Currency Symbol Position', IMS_TEXT_DOMAIN ),
+			'desc'    => esc_html__( 'Default: Before', IMS_TEXT_DOMAIN ),
 			'default' => 'before',
 			'options' => array(
 				'before' => 'Before (E.g. $10)',

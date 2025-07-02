@@ -41,19 +41,19 @@ if ( class_exists( 'WP_OSA' ) ) {
 		array(
 			array(
 				'id'    => 'ims_basic_settings',
-				'title' => esc_html__( 'Basic Settings', 'inspiry-memberships' ),
+				'title' => esc_html__( 'Basic Settings', IMS_TEXT_DOMAIN ),
 			),
 			array(
 				'id'    => 'ims_stripe_settings',
-				'title' => esc_html__( 'Stripe Settings', 'inspiry-memberships' ),
+				'title' => esc_html__( 'Stripe Settings', IMS_TEXT_DOMAIN ),
 			),
 			array(
 				'id'    => 'ims_paypal_settings',
-				'title' => esc_html__( 'PayPal Settings', 'inspiry-memberships' ),
+				'title' => esc_html__( 'PayPal Settings', IMS_TEXT_DOMAIN ),
 			),
 			array(
 				'id'    => 'ims_wire_settings',
-				'title' => esc_html__( 'Wire Transfer Settings', 'inspiry-memberships' ),
+				'title' => esc_html__( 'Wire Transfer Settings', IMS_TEXT_DOMAIN ),
 			),
 		)
 	);

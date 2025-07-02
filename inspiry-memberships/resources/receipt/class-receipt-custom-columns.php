@@ -36,14 +36,14 @@ if ( ! class_exists( 'IMS_Receipt_Custom_Columns' ) ) {
 				'ims_receipt_custom_column_names',
 				array(
 					'cb'            => '<input type="checkbox" />',
-					'title'         => esc_html__( 'Receipt', 'inspiry-memberships' ),
-					'receipt_for'   => esc_html__( 'Receipt For', 'inspiry-memberships' ),
-					'membership'    => esc_html__( 'Membership', 'inspiry-memberships' ),
-					'price'         => esc_html__( 'Price', 'inspiry-memberships' ),
-					'user_id'       => esc_html__( 'User', 'inspiry-memberships' ),
-					'vendor'        => esc_html__( 'Vendor', 'inspiry-memberships' ),
-					'purchase_date' => esc_html__( 'Date of Purchase', 'inspiry-memberships' ),
-					'status'        => esc_html__( 'Status', 'inspiry-memberships' ),
+					'title'         => esc_html__( 'Receipt', IMS_TEXT_DOMAIN ),
+					'receipt_for'   => esc_html__( 'Receipt For', IMS_TEXT_DOMAIN ),
+					'membership'    => esc_html__( 'Membership', IMS_TEXT_DOMAIN ),
+					'price'         => esc_html__( 'Price', IMS_TEXT_DOMAIN ),
+					'user_id'       => esc_html__( 'User', IMS_TEXT_DOMAIN ),
+					'vendor'        => esc_html__( 'Vendor', IMS_TEXT_DOMAIN ),
+					'purchase_date' => esc_html__( 'Date of Purchase', IMS_TEXT_DOMAIN ),
+					'status'        => esc_html__( 'Status', IMS_TEXT_DOMAIN ),
 				),
 			);
 
@@ -77,7 +77,7 @@ if ( ! class_exists( 'IMS_Receipt_Custom_Columns' ) ) {
 					if ( ! empty( $receipt_for ) ) {
 						echo esc_html( $receipt_for );
 					} else {
-						esc_html_e( 'Not Available', 'inspiry-memberships' );
+						esc_html_e( 'Not Available', IMS_TEXT_DOMAIN );
 					}
 					break;
 
@@ -89,10 +89,10 @@ if ( ! class_exists( 'IMS_Receipt_Custom_Columns' ) ) {
 						if ( ! empty( $membership_title ) ) {
 							echo '<a href="' . esc_url( get_edit_post_link( $membership_id ) ) . '">' . esc_html( $membership_title ) . '</a>';
 						} else {
-							esc_html_e( 'Not Available', 'inspiry-memberships' );
+							esc_html_e( 'Not Available', IMS_TEXT_DOMAIN );
 						}
 					} else {
-						esc_html_e( 'Not Available', 'inspiry-memberships' );
+						esc_html_e( 'Not Available', IMS_TEXT_DOMAIN );
 					}
 					break;
 
@@ -109,7 +109,7 @@ if ( ! class_exists( 'IMS_Receipt_Custom_Columns' ) ) {
 					if ( ! empty( $price ) ) {
 						echo esc_html( $formatted_price );
 					} else {
-						esc_html_e( 'Free', 'inspiry-memberships' );
+						esc_html_e( 'Free', IMS_TEXT_DOMAIN );
 					}
 					break;
 
@@ -122,22 +122,22 @@ if ( ! class_exists( 'IMS_Receipt_Custom_Columns' ) ) {
 					if ( ! empty( $user_name ) ) {
 						echo '<a href="' . esc_url( get_edit_user_link( $user_id ) ) . '">' . esc_html( $user_name ) . '</a>';
 					} else {
-						esc_html_e( 'Not Available', 'inspiry-memberships' );
+						esc_html_e( 'Not Available', IMS_TEXT_DOMAIN );
 					}
 					break;
 
 				case 'vendor':
 					$vendor = get_post_meta( $post->ID, "{$prefix}vendor", true );
 					if ( ! empty( $vendor ) && ( 'stripe' === $vendor ) ) {
-						esc_html_e( 'Stripe', 'inspiry-memberships' );
+						esc_html_e( 'Stripe', IMS_TEXT_DOMAIN );
 					} elseif ( ! empty( $vendor ) && ( 'paypal' === $vendor ) ) {
-						esc_html_e( 'PayPal', 'inspiry-memberships' );
+						esc_html_e( 'PayPal', IMS_TEXT_DOMAIN );
 					} elseif ( ! empty( $vendor ) && ( 'wire' === $vendor ) ) {
-						esc_html_e( 'Wire Transfer', 'inspiry-memberships' );
+						esc_html_e( 'Wire Transfer', IMS_TEXT_DOMAIN );
 					} elseif ( ! empty( $vendor ) && ( 'woocommerce' === $vendor ) ) {
-						esc_html_e( 'WooCommerce', 'inspiry-memberships' );
+						esc_html_e( 'WooCommerce', IMS_TEXT_DOMAIN );
 					} else {
-						esc_html_e( 'Not Available', 'inspiry-memberships' );
+						esc_html_e( 'Not Available', IMS_TEXT_DOMAIN );
 					}
 					break;
 
@@ -146,7 +146,7 @@ if ( ! class_exists( 'IMS_Receipt_Custom_Columns' ) ) {
 					if ( ! empty( $purchase_date ) ) {
 						echo esc_html( $purchase_date );
 					} else {
-						esc_html_e( 'Not Available', 'inspiry-memberships' );
+						esc_html_e( 'Not Available', IMS_TEXT_DOMAIN );
 					}
 					break;
 				case 'status':
@@ -160,11 +160,11 @@ if ( ! class_exists( 'IMS_Receipt_Custom_Columns' ) ) {
 					$receipt_membership_due_date = get_post_meta( $post->ID, 'ims_receipt_membership_due_date', true );
 
 					if ( empty( $status ) ) :
-						echo '<span class="pending">' . esc_html__( 'Pending', 'inspiry-memberships' ) . '</span>';
+						echo '<span class="pending">' . esc_html__( 'Pending', IMS_TEXT_DOMAIN ) . '</span>';
 					elseif ( $status && ( $current_membership_id !== $receipt_membership_id ) || ( $current_membership_due_date !== $receipt_membership_due_date ) ) :
-						echo '<span class="expired">' . esc_html__( 'Expired', 'inspiry-memberships' ) . '</span>';
+						echo '<span class="expired">' . esc_html__( 'Expired', IMS_TEXT_DOMAIN ) . '</span>';
 					else :
-						echo '<span class="active">' . esc_html__( 'Active', 'inspiry-memberships' ) . '</span>';
+						echo '<span class="active">' . esc_html__( 'Active', IMS_TEXT_DOMAIN ) . '</span>';
 					endif;
 					break;
 

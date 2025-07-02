@@ -46,7 +46,7 @@ if ( ! class_exists( 'IMS_Receipt_Method' ) ) {
 
 			$receipt_args = array(
 				'post_author' => $user_id,
-				'post_title'  => esc_html__( 'Receipt', 'inspiry-memberships' ),
+				'post_title'  => esc_html__( 'Receipt', IMS_TEXT_DOMAIN ),
 				'post_status' => 'publish',
 				'post_type'   => 'ims_receipt',
 			);
@@ -58,7 +58,7 @@ if ( ! class_exists( 'IMS_Receipt_Method' ) ) {
 				$receipt_args = array(
 					'ID'         => $receipt_id,
 					'post_type'  => 'ims_receipt',
-					'post_title' => esc_html__( 'Receipt ', 'inspiry-memberships' ) . $receipt_id,
+					'post_title' => esc_html__( 'Receipt ', IMS_TEXT_DOMAIN ) . $receipt_id,
 				);
 
 				$receipt_id = wp_update_post( $receipt_args );
@@ -68,8 +68,8 @@ if ( ! class_exists( 'IMS_Receipt_Method' ) ) {
 					$receipt        = get_post( $receipt_id );
 					$prefix         = apply_filters( 'ims_receipt_meta_prefix', 'ims_receipt_' );
 					$membership_obj = ims_get_membership_object( $membership_id );
-					$receipt_type   = esc_html__( 'Normal Membership', 'inspiry-memberships' );
-					$receipt_type   = ( ! empty( $recurring ) ) ? esc_html__( 'Recurring Membership', 'inspiry-memberships' ) : $receipt_type;
+					$receipt_type   = esc_html__( 'Normal Membership', IMS_TEXT_DOMAIN );
+					$receipt_type   = ( ! empty( $recurring ) ) ? esc_html__( 'Recurring Membership', IMS_TEXT_DOMAIN ) : $receipt_type;
 					$price          = $membership_obj->get_price();
 
 					if ( $blank ) {

@@ -30,22 +30,22 @@ class IMS_Email {
 		$admin_email  = get_bloginfo( 'admin_email' ); // Get admin email.
 		$header_phone = get_option( 'theme_header_phone' ); // Get header phone number.
 		$membership   = esc_html( get_the_title( $membership_id ) );
-		$subject      = esc_html__( 'Membership Package Subscription is Canceled', 'inspiry-memberships' ) . ' - ' . get_bloginfo( 'name' );
+		$subject      = esc_html__( 'Membership Package Subscription is Canceled', IMS_TEXT_DOMAIN ) . ' - ' . get_bloginfo( 'name' );
 
 		// translators: name of the membership package.
-		$message  = sprintf( esc_html__( 'Your %s membership package subscription has been cancelled.', 'inspiry-memberships' ), '<strong>' . $membership . '</strong>' ) . '<br/><br/>';
+		$message  = sprintf( esc_html__( 'Your %s membership package subscription has been cancelled.', IMS_TEXT_DOMAIN ), '<strong>' . $membership . '</strong>' ) . '<br/><br/>';
 
 		if ( is_email( $admin_email ) ) {
-			$message .= esc_html__( 'For any further assistance, email us at', 'inspiry-memberships' ) . ' ' . $admin_email;
+			$message .= esc_html__( 'For any further assistance, email us at', IMS_TEXT_DOMAIN ) . ' ' . $admin_email;
 
 			if ( ! empty( $header_phone ) ) {
-				$message .= esc_html__( ' OR call us at ', 'inspiry-memberships' ) . ' ' . $header_phone;
+				$message .= esc_html__( ' OR call us at ', IMS_TEXT_DOMAIN ) . ' ' . $header_phone;
 			}
 
 			$message .= '<br/><br/>';
 		}
 
-		$message .= esc_html__( 'Regards', 'inspiry-memberships' );
+		$message .= esc_html__( 'Regards', IMS_TEXT_DOMAIN );
 
 		$message = apply_filters( 'ims_membership_cancelled_mail', $message, $user_id, $membership_id );
 
@@ -72,11 +72,11 @@ class IMS_Email {
 
 		// Set vendor.
 		if ( ! empty( $vendor ) && 'paypal' === $vendor ) {
-			$vendor = esc_html__( 'via PayPal', 'inspiry-memberships' );
+			$vendor = esc_html__( 'via PayPal', IMS_TEXT_DOMAIN );
 		} elseif ( ! empty( $vendor ) && 'stripe' === $vendor ) {
-			$vendor = esc_html__( 'via Stripe', 'inspiry-memberships' );
+			$vendor = esc_html__( 'via Stripe', IMS_TEXT_DOMAIN );
 		} elseif ( ! empty( $vendor ) && 'wire' === $vendor ) {
-			$vendor = esc_html__( 'via Wire Transfer', 'inspiry-memberships' );
+			$vendor = esc_html__( 'via Wire Transfer', IMS_TEXT_DOMAIN );
 		}
 
 		// Get user.
@@ -92,40 +92,40 @@ class IMS_Email {
 		if ( empty( $recurring ) ) {
 			$website_url = home_url( '/' );
 			// Membership Activation Mail.
-			$subject = esc_html__( 'Membership Package Subscription is Activated', 'inspiry-memberships' ) . ' - ' . get_bloginfo( 'name' );
-			$message = sprintf( esc_html__( 'Your %1$s membership package subscription has been activated. For more details please visit %2$s page of your account on our %3$swebsite%4$s.', 'inspiry-memberships' ), '<strong>' . $membership_title . '</strong>', '<strong>' . esc_html__( 'My Membership', 'inspiry-memberships' ) . '</strong>', '<a href="' . esc_url( $website_url ) . '" target="_blank">', '</a>' ) . '<br/><br/>';
+			$subject = esc_html__( 'Membership Package Subscription is Activated', IMS_TEXT_DOMAIN ) . ' - ' . get_bloginfo( 'name' );
+			$message = sprintf( esc_html__( 'Your %1$s membership package subscription has been activated. For more details please visit %2$s page of your account on our %3$swebsite%4$s.', IMS_TEXT_DOMAIN ), '<strong>' . $membership_title . '</strong>', '<strong>' . esc_html__( 'My Membership', IMS_TEXT_DOMAIN ) . '</strong>', '<a href="' . esc_url( $website_url ) . '" target="_blank">', '</a>' ) . '<br/><br/>';
 
 			if ( is_email( $admin_email ) ) {
-				$message .= esc_html__( 'For any further assistance, email us at', 'inspiry-memberships' ) . ' ' . $admin_email;
+				$message .= esc_html__( 'For any further assistance, email us at', IMS_TEXT_DOMAIN ) . ' ' . $admin_email;
 
 				if ( ! empty( $header_phone ) ) {
-					$message .= esc_html__( ' OR call us at ', 'inspiry-memberships' ) . ' ' . $header_phone;
+					$message .= esc_html__( ' OR call us at ', IMS_TEXT_DOMAIN ) . ' ' . $header_phone;
 				}
 
 				$message .= '<br/><br/>';
 			}
 
-			$message .= esc_html__( 'Regards', 'inspiry-memberships' );
+			$message .= esc_html__( 'Regards', IMS_TEXT_DOMAIN );
 
 			$message = apply_filters( 'ims_membership_user_mail', $message, $user_id, $membership_id, $vendor );
 		} else {
 			$website_url = home_url( '/' );
 
 			// Update Membership Mail.
-			$subject = esc_html__( 'Membership Package Subscription is Updated.', 'inspiry-memberships' ) . ' - ' . get_bloginfo( 'name' );
-			$message = sprintf( esc_html__( 'Your %1$s membership package subscription has been updated. For more details please visit %2$s page of your account on our %3$swebsite%4$s.', 'inspiry-memberships' ), '<strong>' . $membership_title . '</strong>', '<strong>' . esc_html__( 'My Membership', 'inspiry-memberships' ) . '</strong>', '<a href="' . esc_url( $website_url ) . '" target="_blank">', '</a>' ) . '<br/><br/>';
+			$subject = esc_html__( 'Membership Package Subscription is Updated.', IMS_TEXT_DOMAIN ) . ' - ' . get_bloginfo( 'name' );
+			$message = sprintf( esc_html__( 'Your %1$s membership package subscription has been updated. For more details please visit %2$s page of your account on our %3$swebsite%4$s.', IMS_TEXT_DOMAIN ), '<strong>' . $membership_title . '</strong>', '<strong>' . esc_html__( 'My Membership', IMS_TEXT_DOMAIN ) . '</strong>', '<a href="' . esc_url( $website_url ) . '" target="_blank">', '</a>' ) . '<br/><br/>';
 
 			if ( is_email( $admin_email ) ) {
-				$message .= esc_html__( 'For any further assistance, email us at', 'inspiry-memberships' ) . ' ' . $admin_email;
+				$message .= esc_html__( 'For any further assistance, email us at', IMS_TEXT_DOMAIN ) . ' ' . $admin_email;
 
 				if ( ! empty( $header_phone ) ) {
-					$message .= esc_html__( ' OR call us at ', 'inspiry-memberships' ) . ' ' . $header_phone;
+					$message .= esc_html__( ' OR call us at ', IMS_TEXT_DOMAIN ) . ' ' . $header_phone;
 				}
 
 				$message .= '<br/><br/>';
 			}
 
-			$message .= esc_html__( 'Regards', 'inspiry-memberships' );
+			$message .= esc_html__( 'Regards', IMS_TEXT_DOMAIN );
 			$message  = apply_filters( 'ims_recurring_membership_user_mail', $message, $user_id, $membership_id, $vendor );
 		}
 
@@ -152,11 +152,11 @@ class IMS_Email {
 
 		// Set vendor.
 		if ( ! empty( $vendor ) && 'paypal' === $vendor ) {
-			$vendor = esc_html__( 'via PayPal', 'inspiry-memberships' );
+			$vendor = esc_html__( 'via PayPal', IMS_TEXT_DOMAIN );
 		} elseif ( ! empty( $vendor ) && 'stripe' === $vendor ) {
-			$vendor = esc_html__( 'via Stripe', 'inspiry-memberships' );
+			$vendor = esc_html__( 'via Stripe', IMS_TEXT_DOMAIN );
 		} elseif ( ! empty( $vendor ) && 'wire' === $vendor ) {
-			$vendor = esc_html__( 'via Wire Transfer', 'inspiry-memberships' );
+			$vendor = esc_html__( 'via Wire Transfer', IMS_TEXT_DOMAIN );
 		}
 
 		$admin_email      = get_bloginfo( 'admin_email' ); // Get admin email.
@@ -165,15 +165,15 @@ class IMS_Email {
 
 		if ( empty( $recurring ) ) {
 
-			$subject  = esc_html__( 'Membership Package Subscription is Activated', 'inspiry-memberships' ) . ' - ' . get_bloginfo( 'name' );
-			$message  = sprintf( esc_html__( 'A %s membership package subscription is activated on your site.', 'inspiry-memberships' ), '<strong>' . $membership_title . '</strong>' ) . '<br/><br/>';
-			$message .= sprintf( esc_html__( 'For more details please check %s', 'inspiry-memberships' ), '<strong>' . $receipt_title . '</strong>' );
+			$subject  = esc_html__( 'Membership Package Subscription is Activated', IMS_TEXT_DOMAIN ) . ' - ' . get_bloginfo( 'name' );
+			$message  = sprintf( esc_html__( 'A %s membership package subscription is activated on your site.', IMS_TEXT_DOMAIN ), '<strong>' . $membership_title . '</strong>' ) . '<br/><br/>';
+			$message .= sprintf( esc_html__( 'For more details please check %s', IMS_TEXT_DOMAIN ), '<strong>' . $receipt_title . '</strong>' );
 			$message  = apply_filters( 'ims_membership_admin_mail', $message, $membership_id, $vendor );
 		} elseif ( ! empty( $recurring ) ) {
 
-			$subject  = esc_html__( 'Membership Package Subscription is Updated', 'inspiry-memberships' ) . ' - ' . get_bloginfo( 'name' );
-			$message  = sprintf( esc_html__( 'A %s membership package subscription is updated on your site.', 'inspiry-memberships' ), '<strong>' . $membership_title . '</strong>' ) . '<br/><br/>';
-			$message .= sprintf( esc_html__( 'For more details please check %s', 'inspiry-memberships' ), '<strong>' . $receipt_title . '</strong>' );
+			$subject  = esc_html__( 'Membership Package Subscription is Updated', IMS_TEXT_DOMAIN ) . ' - ' . get_bloginfo( 'name' );
+			$message  = sprintf( esc_html__( 'A %s membership package subscription is updated on your site.', IMS_TEXT_DOMAIN ), '<strong>' . $membership_title . '</strong>' ) . '<br/><br/>';
+			$message .= sprintf( esc_html__( 'For more details please check %s', IMS_TEXT_DOMAIN ), '<strong>' . $receipt_title . '</strong>' );
 			$message  = apply_filters( 'ims_recurring_membership_admin_mail', $message, $membership_id, $vendor );
 		}
 
@@ -206,21 +206,21 @@ class IMS_Email {
 		$admin_email  = get_bloginfo( 'admin_email' ); // Get admin email.
 		$header_phone = get_option( 'theme_header_phone' ); // Get header phone number.
 
-		$subject  = esc_html__( 'Your membership package subscription is about to end', 'inspiry-memberships' ) . ' - ' . get_bloginfo( 'name' );
-		$message  = sprintf( esc_html__( 'Your membership package subscription on %s is about to end.', 'inspiry-memberships' ), $site_name ) . "<br/><br/>";
-		$message .= esc_html__( 'Please make sure that you renew your subscription within due date. Otherwise your subscription will be cancelled.', 'inspiry-memberships' ) . "<br/><br/>";
+		$subject  = esc_html__( 'Your membership package subscription is about to end', IMS_TEXT_DOMAIN ) . ' - ' . get_bloginfo( 'name' );
+		$message  = sprintf( esc_html__( 'Your membership package subscription on %s is about to end.', IMS_TEXT_DOMAIN ), $site_name ) . "<br/><br/>";
+		$message .= esc_html__( 'Please make sure that you renew your subscription within due date. Otherwise your subscription will be cancelled.', IMS_TEXT_DOMAIN ) . "<br/><br/>";
 
 		if ( is_email( $admin_email ) ) {
-			$message .= esc_html__( 'For any further assistance, email us at', 'inspiry-memberships' ) . ' ' . $admin_email;
+			$message .= esc_html__( 'For any further assistance, email us at', IMS_TEXT_DOMAIN ) . ' ' . $admin_email;
 
 			if ( ! empty( $header_phone ) ) {
-				$message .= esc_html__( ' OR call us at ', 'inspiry-memberships' ) . ' ' . $header_phone;
+				$message .= esc_html__( ' OR call us at ', IMS_TEXT_DOMAIN ) . ' ' . $header_phone;
 			}
 
 			$message .= '<br/><br/>';
 		}
 
-		$message .= esc_html__( 'Regards', 'inspiry-memberships' );
+		$message .= esc_html__( 'Regards', IMS_TEXT_DOMAIN );
 		$message  = apply_filters( 'ims_membership_reminder_mail', $message, $user_id, $membership_id );
 
 		if ( is_email( $user_email ) ) {

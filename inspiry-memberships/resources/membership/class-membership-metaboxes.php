@@ -34,7 +34,7 @@ if ( ! class_exists( 'IMS_Membership_Meta_Boxes' ) ) :
 
 			add_meta_box(
 				'membership-settings-metabox',
-				esc_html__( 'Membership Detail', 'inspiry-memberships' ),
+				esc_html__( 'Membership Detail', IMS_TEXT_DOMAIN ),
 				array( $this, 'meta_box_content' ),
 				'ims_membership',
 				'normal',
@@ -59,31 +59,31 @@ if ( ! class_exists( 'IMS_Membership_Meta_Boxes' ) ) :
                 <tr valign="top">
                     <th scope="row" valign="top">
                         <label for="allowed_properties">
-							<?php esc_html_e( 'Total number of allowed properties', 'inspiry-memberships' ); ?>
+							<?php esc_html_e( 'Total number of allowed properties', IMS_TEXT_DOMAIN ); ?>
                         </label>
                     </th>
                     <td>
                         <input type="number" name="allowed_properties" id="allowed_properties" value="<?php echo esc_attr( get_post_meta( $membership->ID, "{$prefix}allowed_properties", true ) ); ?>" />
-                        <p class="description"><?php esc_html_e( 'Example: 20', 'inspiry-memberships' ); ?></p>
+                        <p class="description"><?php esc_html_e( 'Example: 20', IMS_TEXT_DOMAIN ); ?></p>
                     </td>
                 </tr>
 
                 <tr valign="top">
                     <th scope="row" valign="top">
                         <label for="featured_properties">
-							<?php esc_html_e( 'Max number of featured properties', 'inspiry-memberships' ); ?>
+							<?php esc_html_e( 'Max number of featured properties', IMS_TEXT_DOMAIN ); ?>
                         </label>
                     </th>
                     <td>
                         <input type="number" name="featured_properties" id="featured_properties" value="<?php echo esc_attr( get_post_meta( $membership->ID, "{$prefix}featured_properties", true ) ); ?>" />
-                        <p class="description"><?php esc_html_e( 'Example: 4', 'inspiry-memberships' ); ?></p>
+                        <p class="description"><?php esc_html_e( 'Example: 4', IMS_TEXT_DOMAIN ); ?></p>
                     </td>
                 </tr>
 
                 <tr valign="top">
                     <th scope="row" valign="top">
                         <label for="price">
-							<?php esc_html_e( 'Membership price', 'inspiry-memberships' ); ?>
+							<?php esc_html_e( 'Membership price', IMS_TEXT_DOMAIN ); ?>
                         </label>
                     </th>
                     <td>
@@ -93,10 +93,10 @@ if ( ! class_exists( 'IMS_Membership_Meta_Boxes' ) ) :
 						<?php else : ?>
                             <input type="hidden" name="price" id="price" step="any" value="<?php echo esc_attr( $price ); ?>" />                            <input type="number" step="any" value="<?php echo esc_attr( $price ); ?>" <?php echo ( ! empty( $price ) ) ? 'disabled' : ''; ?> />
 						<?php endif; ?>
-                        <p class="description"><?php esc_html_e( 'Example: 20', 'inspiry-memberships' ); ?></p>
+                        <p class="description"><?php esc_html_e( 'Example: 20', IMS_TEXT_DOMAIN ); ?></p>
                         <p class="description doc-note">
 							<?php
-							echo sprintf(esc_html__( '%sNote:%s The price of a membership package can’t be changed after creating the package. If you want to change the price of the package later on then please create another one.', 'inspiry-memberships' ), '<strong>', '</strong>');
+							echo sprintf(esc_html__( '%sNote:%s The price of a membership package can’t be changed after creating the package. If you want to change the price of the package later on then please create another one.', IMS_TEXT_DOMAIN ), '<strong>', '</strong>');
 							?>
                         </p>
                     </td>
@@ -105,7 +105,7 @@ if ( ! class_exists( 'IMS_Membership_Meta_Boxes' ) ) :
                 <tr valign="top">
                     <th scope="row" valign="top">
                         <label for="duration">
-							<?php esc_html_e( 'Membership billing period', 'inspiry-memberships' ); ?>
+							<?php esc_html_e( 'Membership billing period', IMS_TEXT_DOMAIN ); ?>
                         </label>
                     </th>
                     <td>
@@ -113,22 +113,22 @@ if ( ! class_exists( 'IMS_Membership_Meta_Boxes' ) ) :
 						<?php $duration_unit = get_post_meta( $membership->ID, "{$prefix}duration_unit", true ); ?>
                         <select name="duration_unit" id="duration_unit">
                             <option value="" <?php echo ( '' == $duration_unit ) ? 'selected' : ''; ?> disabled>
-								<?php esc_html_e( 'None', 'inspiry-memberships' ); ?>
+								<?php esc_html_e( 'None', IMS_TEXT_DOMAIN ); ?>
                             </option>
                             <option value="days" <?php echo ( 'days' == $duration_unit ) ? 'selected' : ''; ?> >
-								<?php esc_html_e( 'Days', 'inspiry-memberships' ); ?>
+								<?php esc_html_e( 'Days', IMS_TEXT_DOMAIN ); ?>
                             </option>
                             <option value="weeks" <?php echo ( 'weeks' == $duration_unit ) ? 'selected' : ''; ?> >
-								<?php esc_html_e( 'Weeks', 'inspiry-memberships' ); ?>
+								<?php esc_html_e( 'Weeks', IMS_TEXT_DOMAIN ); ?>
                             </option>
                             <option value="months" <?php echo ( 'months' == $duration_unit ) ? 'selected' : ''; ?> >
-								<?php esc_html_e( 'Months', 'inspiry-memberships' ); ?>
+								<?php esc_html_e( 'Months', IMS_TEXT_DOMAIN ); ?>
                             </option>
                             <option value="years" <?php echo ( 'years' == $duration_unit ) ? 'selected' : ''; ?> >
-								<?php esc_html_e( 'Years', 'inspiry-memberships' ); ?>
+								<?php esc_html_e( 'Years', IMS_TEXT_DOMAIN ); ?>
                             </option>
                         </select>
-                        <p class="description"><?php esc_html_e( 'Provide a number and select related duration.', 'inspiry-memberships' ); ?></p>
+                        <p class="description"><?php esc_html_e( 'Provide a number and select related duration.', IMS_TEXT_DOMAIN ); ?></p>
                     </td>
                 </tr>
 
@@ -137,7 +137,7 @@ if ( ! class_exists( 'IMS_Membership_Meta_Boxes' ) ) :
                     <td>
 						<?php $is_popular = ! empty( get_post_meta( $membership->ID, "{$prefix}is_popular", true ) ) ? '1' : '0'; ?>
                         <input class="checkbox" type="checkbox"<?php checked( $is_popular ); ?> id="is_popular" name="is_popular" />
-                        <label for="is_popular"><strong><?php esc_html_e( 'Mark this package as Popular?', 'inspiry-memberships' ); ?></strong></label>
+                        <label for="is_popular"><strong><?php esc_html_e( 'Mark this package as Popular?', IMS_TEXT_DOMAIN ); ?></strong></label>
                     </td>
                 </tr>
 
@@ -150,23 +150,23 @@ if ( ! class_exists( 'IMS_Membership_Meta_Boxes' ) ) :
                 <tr>
                     <th scope="row" valign="top">
                         <label for="stripe_plan_id">
-							<?php esc_html_e( 'Stripe Product Price ID', 'inspiry-memberships' ); ?>
+							<?php esc_html_e( 'Stripe Product Price ID', IMS_TEXT_DOMAIN ); ?>
                         </label>
                     </th>
                     <td>
                         <input type="text" name="stripe_plan_id" id="stripe_plan_id" value="<?php echo esc_attr( get_post_meta( $membership->ID, "{$prefix}stripe_plan_id", true ) ); ?>" />
-                        <p class="description"><?php echo sprintf( esc_html__( 'Required, If you are using Stripe for recurring payments. For more details see related guide %s.', 'inspiry-memberships' ), '<a href="https://inspirythemes.com/realhomes-memberships-setup/#stripe-settings" target="_blank">by clicking here</a>' ); ?></p>
+                        <p class="description"><?php echo sprintf( esc_html__( 'Required, If you are using Stripe for recurring payments. For more details see related guide %s.', IMS_TEXT_DOMAIN ), '<a href="https://inspirythemes.com/realhomes-memberships-setup/#stripe-settings" target="_blank">' . esc_html__( 'by clicking here', IMS_TEXT_DOMAIN ) . '</a>' ); ?></p>
                     </td>
                 </tr>
                 <tr>
                     <th scope="row" valign="top">
                         <label for="stripe_plan_id">
-							<?php esc_html_e( 'PayPal Plan Price ID', 'inspiry-memberships' ); ?>
+							<?php esc_html_e( 'PayPal Plan Price ID', IMS_TEXT_DOMAIN ); ?>
                         </label>
                     </th>
                     <td>
                         <input type="text" name="paypal_plan_id" id="paypal_plan_id" value="<?php echo esc_attr( get_post_meta( $membership->ID, "{$prefix}paypal_plan_id", true ) ); ?>" />
-                        <p class="description"><?php echo sprintf( esc_html__( 'Required, If you are using PayPal for recurring payments. For more details see related guide %s.', 'inspiry-memberships' ), '<a href="https://inspirythemes.com/realhomes-memberships-setup/#paypal-settings" target="_blank">by clicking here</a>' ); ?></p>
+                        <p class="description"><?php echo sprintf( esc_html__( 'Required, If you are using PayPal for recurring payments. For more details see related guide %s.', IMS_TEXT_DOMAIN ), '<a href="https://inspirythemes.com/realhomes-memberships-setup/#paypal-settings" target="_blank">' . esc_html__( 'by clicking here', IMS_TEXT_DOMAIN ) . '</a>' ); ?></p>
                     </td>
                 </tr>
 
