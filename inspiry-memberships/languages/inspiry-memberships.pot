@@ -16,25 +16,25 @@ msgstr ""
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;_nx_noop:1,2,3c;_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Generator: Poedit 3.6\n"
+"X-Generator: Poedit 3.8\n"
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: *.js\n"
 "X-Poedit-SearchPathExcluded-1: svn\n"
 
-#: inspiry-memberships.php:242 resources/settings/class-wp-osa.php:690
+#: inspiry-memberships.php:240 resources/settings/class-wp-osa.php:690
 #: resources/settings/class-wp-osa.php:691
 msgid "Settings"
 msgstr ""
 
-#: inspiry-memberships.php:243
+#: inspiry-memberships.php:241
 msgid "Setup Guide"
 msgstr ""
 
-#: inspiry-memberships.php:323
+#: inspiry-memberships.php:321
 msgid "Please deactivate the RealHomes Stripe Payments plugin to RealHomes Memberships plugin."
 msgstr ""
 
-#: inspiry-memberships.php:331
+#: inspiry-memberships.php:329
 msgid "Please deactivate the RealHomes PayPal Payments plugin to RealHomes Memberships plugin."
 msgstr ""
 
