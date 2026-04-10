@@ -3,7 +3,7 @@
  * Plugin Name:     RealHomes Memberships
  * Plugin URI:      https://github.com/InspiryThemes/inspiry-memberships
  * Description:     Provides functionality to create membership packages for real estate RealHomes theme by InspiryThemes
- * Version:         3.0.7
+ * Version:         3.0.8
  * Tested up to:    6.9
  * Requires PHP:    8.3
  * Author:          InspiryThemes
@@ -116,13 +116,13 @@ if ( ! class_exists( 'Inspiry_Memberships' ) ) :
 					$reflection = new ReflectionClass( $registry );
 					if ( $reflection->hasProperty( 'custom_paths' ) ) {
 						$prop = $reflection->getProperty( 'custom_paths' );
-						$prop->setAccessible( true );
+
 						$custom_paths = $prop->getValue( $registry );
 						if ( isset( $custom_paths[ IMS_TEXT_DOMAIN ] ) ) {
 							unset( $custom_paths[ IMS_TEXT_DOMAIN ] );
 							$prop->setValue( $registry, $custom_paths );
 						}
-						$prop->setAccessible( false );
+
 					}
 				} catch ( Exception $e ) {
 					// Optional: log or fail silently
@@ -237,7 +237,7 @@ if ( ! class_exists( 'Inspiry_Memberships' ) ) :
 		 * @return array
 		 */
 		public function plugin_action_links( $links ) {
-			$settings_link      = sprintf( '<a href="%1$s">%2$s</a>', admin_url( 'admin.php?page=ims_settings' ), esc_html__( 'Settings', IMS_TEXT_DOMAIN ) );
+			$settings_link      = sprintf( '<a href="%1$s">%2$s</a>', admin_url( 'admin.php?page=realhomes-settings&tab=memberships' ), esc_html__( 'Settings', IMS_TEXT_DOMAIN ) );
 			$documentation_link = sprintf( '<a href="%1$s" target="_blank">%2$s</a>', 'https://inspirythemes.com/realhomes-memberships-setup/', esc_html__( 'Setup Guide', IMS_TEXT_DOMAIN ) );
 
 			array_unshift( $links, $settings_link, $documentation_link );

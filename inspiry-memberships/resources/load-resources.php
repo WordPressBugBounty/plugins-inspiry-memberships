@@ -59,12 +59,12 @@ if ( file_exists( IMS_BASE_DIR . '/resources/settings/admin-menu.php' ) ) {
 }
 
 /**
- * Memberships settings initialization.
+ * Memberships settings to ERE options panel integration.
  *
- * @since 1.0.0
+ * @since 3.0.8
  */
-if ( file_exists( IMS_BASE_DIR . '/resources/settings/settings-init.php' ) ) {
-	include_once IMS_BASE_DIR . '/resources/settings/settings-init.php';
+if ( file_exists( IMS_BASE_DIR . '/resources/settings/panel/settings-loader.php' ) ) {
+	include_once IMS_BASE_DIR . '/resources/settings/panel/settings-loader.php';
 }
 
 /**

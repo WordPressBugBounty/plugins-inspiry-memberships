@@ -4,7 +4,7 @@ Tags: Membership, Real estate, Paid listing, Real estate memberships, Payments
 Requires at least: 6.0
 Tested up to: 6.9
 Requires PHP: 8.3
-Stable tag: 3.0.7
+Stable tag: 3.0.8
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -74,6 +74,12 @@ Simplify your membership management and elevate user experience with our compreh
 7. Wire Transfer Settings
 
 == Changelog ==
+
+= 3.0.8 =
+* Added RealHomes Memberships plugin settings to RealHomes Options Panel
+* Some other code improvements
+* Updated language POT file
+* Tested plugin with WordPress 6.9.4
 
 = 3.0.7 =
 * WordPress 6.9 compatibility confirmed
