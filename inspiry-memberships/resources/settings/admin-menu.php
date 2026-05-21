@@ -57,6 +57,13 @@ if ( ! class_exists( 'IMS_Admin_Menu' ) ) :
 
 			// Add all sub menus.
 			$sub_menus = array(
+				'packages'      => array(
+					'inspiry_memberships',
+					esc_html__( 'Packages', IMS_TEXT_DOMAIN ),
+					esc_html__( 'Packages', IMS_TEXT_DOMAIN ),
+					'manage_options',
+					'edit.php?post_type=ims_membership',
+				),
 				'addnew'        => array(
 					'inspiry_memberships',
 					esc_html__( 'Add New Membership', IMS_TEXT_DOMAIN ),
@@ -119,6 +126,7 @@ if ( ! class_exists( 'IMS_Admin_Menu' ) ) :
 					'edit-ims_membership',
 					'ims_receipt',
 					'edit-ims_receipt',
+					'memberships_page_ims_assign_membership',
 				)
 			);
 

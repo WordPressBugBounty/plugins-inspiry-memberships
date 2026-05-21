@@ -365,5 +365,56 @@
             }
         } );
 
+        // Membership Assignment Logic
+        if ( typeof imsAssignVars !== 'undefined' ) {
+            var packageDetails = imsAssignVars.packageDetails;
+
+            $( '#ims_user_id' ).on( 'change', function () {
+                var userId        = $( this ).val();
+                var infoContainer = $( '#ims_current_user_membership_info' );
+
+                if ( ! userId ) {
+                    infoContainer.slideUp();
+                    return;
+                }
+
+                infoContainer.html( '<p><i class="fas fa-spinner fa-spin"></i> ' + ( imsAssignVars.loadingMsg || 'Loading...' ) + '</p>' ).slideDown();
+
+                $.post( ajaxurl, {
+                    action  : 'ims_get_user_membership_info',
+                    user_id : userId
+                }, function ( response ) {
+                    if ( response.success ) {
+                        infoContainer.html( response.data.html );
+                    } else {
+                        infoContainer.html( '<p class="error">' + response.data + '</p>' );
+                    }
+                } );
+            } );
+
+            $( '#ims_membership_id' ).on( 'change', function () {
+                var packageId     = $( this ).val();
+                var infoContainer = $( '#ims_selected_package_info' );
+
+                if ( ! packageId || packageId === 'none' || typeof packageDetails[ packageId ] === 'undefined' ) {
+                    infoContainer.slideUp();
+                    return;
+                }
+
+                var pkg = packageDetails[ packageId ];
+
+                var html = '<div class="membership-info"><div class="dl-list">';
+                html += '<h4>' + ( imsAssignVars.packageFeaturesLabel || 'Selected Package features' ) + '</h4>';
+                html += '<dl><dt>' + ( imsAssignVars.titleLabel || 'Title' ) + '</dt><dd>' + pkg.title + '</dd></dl>';
+                html += '<dl><dt>' + ( imsAssignVars.durationLabel || 'Duration' ) + '</dt><dd>' + pkg.duration + '</dd></dl>';
+                html += '<dl><dt>' + ( imsAssignVars.allowedLabel || 'Allowed Properties' ) + '</dt><dd>' + pkg.allowed + '</dd></dl>';
+                html += '<dl><dt>' + ( imsAssignVars.featuredLabel || 'Allowed Featured' ) + '</dt><dd>' + pkg.featured + '</dd></dl>';
+                html += '</div>';
+                html += '<p class="info-text"><i class="fas fa-info-circle"></i> ' + ( imsAssignVars.warningMsg || 'Assigning this package will bypass payment and immediately grant the user the specified duration and property capabilities.' ) + '</p></div>';
+
+                infoContainer.html( html ).slideDown();
+            } );
+        }
+
     } );
 } )( jQuery );

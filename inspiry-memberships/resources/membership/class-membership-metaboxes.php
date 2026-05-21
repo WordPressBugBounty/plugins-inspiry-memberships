@@ -70,6 +70,18 @@ if ( ! class_exists( 'IMS_Membership_Meta_Boxes' ) ) :
 
                 <tr valign="top">
                     <th scope="row" valign="top">
+                        <label for="total_properties_limit">
+							<?php esc_html_e( 'Total number of allowed properties (including drafts/pending)', IMS_TEXT_DOMAIN ); ?>
+                        </label>
+                    </th>
+                    <td>
+                        <input type="number" name="total_properties_limit" id="total_properties_limit" value="<?php echo esc_attr( get_post_meta( $membership->ID, "{$prefix}total_properties_limit", true ) ); ?>" />
+                        <p class="description"><?php esc_html_e( 'Example: 30 (Leave empty for no limit)', IMS_TEXT_DOMAIN ); ?></p>
+                    </td>
+                </tr>
+
+                <tr valign="top">
+                    <th scope="row" valign="top">
                         <label for="featured_properties">
 							<?php esc_html_e( 'Max number of featured properties', IMS_TEXT_DOMAIN ); ?>
                         </label>
@@ -203,15 +215,16 @@ if ( ! class_exists( 'IMS_Membership_Meta_Boxes' ) ) :
 			}
 
 			// Get the posted data and sanitize it for use as an HTML class.
-			$ims_meta_value                        = array();
-			$ims_meta_value['allowed_properties']  = ( isset( $_POST['allowed_properties'] ) ) ? intval( $_POST['allowed_properties'] ) : '';
-			$ims_meta_value['featured_properties'] = ( isset( $_POST['featured_properties'] ) ) ? intval( $_POST['featured_properties'] ) : '';
-			$ims_meta_value['price']               = ( isset( $_POST['price'] ) ) ? floatval( $_POST['price'] ) : '';
-			$ims_meta_value['duration']            = ( isset( $_POST['duration'] ) ) ? intval( $_POST['duration'] ) : '';
-			$ims_meta_value['duration_unit']       = ( isset( $_POST['duration_unit'] ) ) ? sanitize_text_field( $_POST['duration_unit'] ) : '';
-			$ims_meta_value['is_popular']          = ( isset( $_POST['is_popular'] ) ) ? sanitize_text_field( $_POST['is_popular'] ) : '';
-			$ims_meta_value['stripe_plan_id']      = ( isset( $_POST['stripe_plan_id'] ) ) ? sanitize_text_field( $_POST['stripe_plan_id'] ) : '';
-			$ims_meta_value['paypal_plan_id']      = ( isset( $_POST['paypal_plan_id'] ) ) ? sanitize_text_field( $_POST['paypal_plan_id'] ) : '';
+			$ims_meta_value                           = array();
+			$ims_meta_value['allowed_properties']     = ( isset( $_POST['allowed_properties'] ) ) ? intval( $_POST['allowed_properties'] ) : '';
+			$ims_meta_value['total_properties_limit'] = ( isset( $_POST['total_properties_limit'] ) && '' !== $_POST['total_properties_limit'] ) ? intval( $_POST['total_properties_limit'] ) : '';
+			$ims_meta_value['featured_properties']    = ( isset( $_POST['featured_properties'] ) ) ? intval( $_POST['featured_properties'] ) : '';
+			$ims_meta_value['price']                  = ( isset( $_POST['price'] ) ) ? floatval( $_POST['price'] ) : '';
+			$ims_meta_value['duration']               = ( isset( $_POST['duration'] ) ) ? intval( $_POST['duration'] ) : '';
+			$ims_meta_value['duration_unit']          = ( isset( $_POST['duration_unit'] ) ) ? sanitize_text_field( $_POST['duration_unit'] ) : '';
+			$ims_meta_value['is_popular']             = ( isset( $_POST['is_popular'] ) ) ? sanitize_text_field( $_POST['is_popular'] ) : '';
+			$ims_meta_value['stripe_plan_id']         = ( isset( $_POST['stripe_plan_id'] ) ) ? sanitize_text_field( $_POST['stripe_plan_id'] ) : '';
+			$ims_meta_value['paypal_plan_id']         = ( isset( $_POST['paypal_plan_id'] ) ) ? sanitize_text_field( $_POST['paypal_plan_id'] ) : '';
 
 			// Filter the values of meta data being saved by membership post type.
 			$ims_meta_value = apply_filters( 'ims_membership_before_save_meta_values', $ims_meta_value, $membership_id );
@@ -221,6 +234,7 @@ if ( ! class_exists( 'IMS_Membership_Meta_Boxes' ) ) :
 
 			// Save the meta values.
 			$this->save_meta_value( $membership_id, "{$prefix}allowed_properties", $ims_meta_value['allowed_properties'] );
+			$this->save_meta_value( $membership_id, "{$prefix}total_properties_limit", $ims_meta_value['total_properties_limit'] );
 			$this->save_meta_value( $membership_id, "{$prefix}featured_properties", $ims_meta_value['featured_properties'] );
 			$this->save_meta_value( $membership_id, "{$prefix}price", $ims_meta_value['price'] );
 			$this->save_meta_value( $membership_id, "{$prefix}duration", $ims_meta_value['duration'] );

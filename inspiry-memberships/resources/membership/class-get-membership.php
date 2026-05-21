@@ -78,14 +78,15 @@ if ( ! class_exists( 'IMS_Get_Membership' ) ) :
 
 			$prefix          = apply_filters( 'ims_membership_meta_prefix', 'ims_membership_' );
 			$this->meta_keys = array(
-				'properties'          => "{$prefix}allowed_properties",
-				'featured_properties' => "{$prefix}featured_properties",
-				'price'               => "{$prefix}price",
-				'formatted_price'     => "{$prefix}formatted_price",
-				'duration'            => "{$prefix}duration",
-				'duration_unit'       => "{$prefix}duration_unit",
-				'is_popular'          => "{$prefix}is_popular",
-				'stripe_plan_id'      => "{$prefix}stripe_plan_id",
+				'properties'              => "{$prefix}allowed_properties",
+				'total_properties_limit'  => "{$prefix}total_properties_limit",
+				'featured_properties'     => "{$prefix}featured_properties",
+				'price'                   => "{$prefix}price",
+				'formatted_price'         => "{$prefix}formatted_price",
+				'duration'                => "{$prefix}duration",
+				'duration_unit'           => "{$prefix}duration_unit",
+				'is_popular'              => "{$prefix}is_popular",
+				'stripe_plan_id'          => "{$prefix}stripe_plan_id",
 			);
 		}
 
@@ -170,6 +171,24 @@ if ( ! class_exists( 'IMS_Get_Membership' ) ) :
 			}
 
 			return $this->get_meta( $this->meta_keys['properties'] );
+		}
+
+		/**
+		 * Get Membership: Total Properties Limit.
+		 *
+		 * @since 3.0.9
+		 */
+		public function get_total_properties_limit() {
+			// Returns false if ID is not present.
+			if ( ! $this->the_membership_id ) {
+				return false;
+			}
+
+			$limit = $this->get_meta( $this->meta_keys['total_properties_limit'] );
+
+			// Normalize: return empty string when the field is not set or is empty,
+			// so callers can reliably check `'' !== $limit` to detect an active limit.
+			return ( false === $limit || '' === $limit ) ? '' : $limit;
 		}
 
 		/**

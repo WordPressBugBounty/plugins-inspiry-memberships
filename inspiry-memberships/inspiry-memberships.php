@@ -3,8 +3,8 @@
  * Plugin Name:     RealHomes Memberships
  * Plugin URI:      https://github.com/InspiryThemes/inspiry-memberships
  * Description:     Provides functionality to create membership packages for real estate RealHomes theme by InspiryThemes
- * Version:         3.0.8
- * Tested up to:    6.9
+ * Version:         3.0.9
+ * Tested up to:    7.0
  * Requires PHP:    8.3
  * Author:          InspiryThemes
  * Author URI:      https://themeforest.net/item/real-homes-wordpress-real-estate-theme/5373914
@@ -252,17 +252,34 @@ if ( ! class_exists( 'Inspiry_Memberships' ) ) :
 		 */
 		public function load_public_scripts() {
 
-			if ( ! is_admin() && ! empty( $_GET['module'] ) && ! empty( $_GET['submodule'] ) && 'membership' === $_GET['module'] && 'checkout' === $_GET['submodule'] ) {
+			if ( ! is_admin() && ! empty( $_GET['module'] ) && 'membership' === $_GET['module'] ) {
+				$submodule = isset( $_GET['submodule'] ) ? $_GET['submodule'] : '';
 
-				// JS functions file.
-				wp_register_script(
-					'ims-public-js',
-					IMS_BASE_URL . 'resources/js/ims-public.js',
-					array( 'jquery' ),
-					IMS_VERSION,
-					true
-				);
-				wp_enqueue_script( 'ims-public-js' );
+				if ( 'checkout' === $submodule || 'assign-membership' === $submodule ) {
+					// JS functions file.
+					wp_register_script(
+						'ims-public-js',
+						IMS_BASE_URL . 'resources/js/ims-public.js',
+						array( 'jquery' ),
+						IMS_VERSION,
+						true
+					);
+					wp_enqueue_script( 'ims-public-js' );
+
+					if ( 'assign-membership' === $submodule ) {
+						// Localize for assign-membership submodule.
+						wp_localize_script( 'ims-public-js', 'imsAssignVars', array(
+							'packageDetails'       => ims_get_package_details_json(),
+							'loadingMsg'           => esc_html__( 'Loading user membership details...', IMS_TEXT_DOMAIN ),
+							'packageFeaturesLabel' => esc_html__( 'Selected Package features', IMS_TEXT_DOMAIN ),
+							'titleLabel'           => esc_html__( 'Title', IMS_TEXT_DOMAIN ),
+							'durationLabel'        => esc_html__( 'Duration', IMS_TEXT_DOMAIN ),
+							'allowedLabel'         => esc_html__( 'Allowed Properties', IMS_TEXT_DOMAIN ),
+							'featuredLabel'        => esc_html__( 'Allowed Featured', IMS_TEXT_DOMAIN ),
+							'warningMsg'           => esc_html__( 'Assigning this package will bypass payment and immediately grant the user the specified duration and property capabilities.', IMS_TEXT_DOMAIN ),
+						) );
+					}
+				}
 
 
 				$stripe_settings = get_option( 'ims_stripe_settings' );
@@ -299,18 +316,40 @@ if ( ! class_exists( 'Inspiry_Memberships' ) ) :
 		 */
 		public function load_admin_scripts( $hook ) {
 
-			if ( is_admin() && 'memberships_page_ims_settings' === $hook ) {
+			if ( is_admin() ) {
+				if ( 'memberships_page_ims_settings' === $hook ) {
+					// JS functions file.
+					wp_register_script(
+						'ims-admin-js',
+						IMS_BASE_URL . 'resources/js/ims-admin.js',
+						array( 'jquery' ),
+						IMS_VERSION,
+						true
+					);
+					wp_enqueue_script( 'ims-admin-js' );
+				} elseif ( 'memberships_page_ims_assign_membership' === $hook ) {
+					// Enqueue on Assign Membership page.
+					wp_register_script(
+						'ims-admin-js',
+						IMS_BASE_URL . 'resources/js/ims-admin.js',
+						array( 'jquery' ),
+						IMS_VERSION,
+						true
+					);
+					wp_enqueue_script( 'ims-admin-js' );
 
-				// JS functions file.
-				wp_register_script(
-					'ims-admin-js',
-					IMS_BASE_URL . 'resources/js/ims-admin.js',
-					array( 'jquery' ),
-					IMS_VERSION,
-					true
-				);
-				wp_enqueue_script( 'ims-admin-js' );
-
+					// Localize for assign-membership admin page.
+					wp_localize_script( 'ims-admin-js', 'imsAssignVars', array(
+						'packageDetails' => ims_get_package_details_json(),
+						'loadingMsg'     => esc_html__( 'Loading membership info…', IMS_TEXT_DOMAIN ),
+						'packageDetailsLabel' => esc_html__( 'Package Details', IMS_TEXT_DOMAIN ),
+						'titleLabel'     => esc_html__( 'Title', IMS_TEXT_DOMAIN ),
+						'durationLabel'  => esc_html__( 'Duration', IMS_TEXT_DOMAIN ),
+						'allowedLabel'   => esc_html__( 'Allowed Properties', IMS_TEXT_DOMAIN ),
+						'featuredLabel'  => esc_html__( 'Featured Properties', IMS_TEXT_DOMAIN ),
+						'warningMsg'     => esc_html__( 'Assigning this package bypasses payment and immediately grants the user the specified duration and property capabilities.', IMS_TEXT_DOMAIN ),
+					) );
+				}
 			}
 
 		}

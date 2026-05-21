@@ -58,6 +58,41 @@ if ( file_exists( IMS_BASE_DIR . '/resources/membership/class-membership-methods
 	include_once IMS_BASE_DIR . '/resources/membership/class-membership-methods.php';
 }
 
+/**
+ * Membership Admin User Profile.
+ */
+if ( file_exists( IMS_BASE_DIR . '/resources/membership/class-membership-admin-user-profile.php' ) ) {
+	include_once IMS_BASE_DIR . '/resources/membership/class-membership-admin-user-profile.php';
+}
+
+if ( is_admin() && class_exists( 'IMS_Membership_Admin_User_Profile' ) ) {
+	new IMS_Membership_Admin_User_Profile();
+}
+
+/**
+ * Membership Frontend Assign.
+ */
+if ( file_exists( IMS_BASE_DIR . '/resources/membership/class-membership-frontend-assign.php' ) ) {
+	include_once IMS_BASE_DIR . '/resources/membership/class-membership-frontend-assign.php';
+}
+
+if ( class_exists( 'IMS_Membership_Frontend_Assign' ) ) {
+	new IMS_Membership_Frontend_Assign();
+}
+
+/**
+ * Membership Admin Assign.
+ *
+ * WP admin page for manually assigning memberships to users.
+ */
+if ( file_exists( IMS_BASE_DIR . '/resources/membership/class-membership-admin-assign.php' ) ) {
+	include_once IMS_BASE_DIR . '/resources/membership/class-membership-admin-assign.php';
+}
+
+if ( is_admin() && class_exists( 'IMS_Membership_Admin_Assign' ) ) {
+	new IMS_Membership_Admin_Assign();
+}
+
 if ( class_exists( 'IMS_CPT_Membership' ) ) {
 
 	$ims_cpt_membership = new IMS_CPT_Membership();
@@ -142,5 +177,41 @@ if ( class_exists( 'IMS_Membership_Custom_Columns' ) ) {
 			) );
 
 		}
+	}
+}
+
+if ( ! function_exists( 'ims_get_package_details_json' ) ) {
+	/**
+	 * Get all membership packages details in JSON format.
+	 * 
+	 * @since 3.0.8
+	 *
+	 * @return array
+	 */
+	function ims_get_package_details_json() {
+		$packages = get_posts( array(
+			'post_type'      => 'ims_membership',
+			'posts_per_page' => -1,
+			'post_status'    => 'publish',
+		) );
+
+		$package_details = array();
+		if ( ! empty( $packages ) ) {
+			foreach ( $packages as $pkg ) {
+				$pkg_obj = ims_get_membership_object( $pkg->ID );
+				$duration = $pkg_obj->get_duration();
+				$unit = $pkg_obj->get_duration_unit();
+				$allowed_props = $pkg_obj->get_properties();
+				$featured_props = $pkg_obj->get_featured_properties();
+
+				$package_details[ $pkg->ID ] = array(
+					'title'    => $pkg->post_title,
+					'duration' => $duration . ' ' . $unit,
+					'allowed'  => ( ! empty( $allowed_props ) ) ? $allowed_props : '0',
+					'featured' => ( ! empty( $featured_props ) ) ? $featured_props : '0'
+				);
+			}
+		}
+		return $package_details;
 	}
 }

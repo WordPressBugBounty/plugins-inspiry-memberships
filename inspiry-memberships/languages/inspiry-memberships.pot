@@ -29,11 +29,59 @@ msgstr ""
 msgid "Setup Guide"
 msgstr ""
 
-#: inspiry-memberships.php:321
+#: inspiry-memberships.php:273
+msgid "Loading user membership details..."
+msgstr ""
+
+#: inspiry-memberships.php:274
+msgid "Selected Package features"
+msgstr ""
+
+#: inspiry-memberships.php:275 inspiry-memberships.php:346
+msgid "Title"
+msgstr ""
+
+#: inspiry-memberships.php:276 inspiry-memberships.php:347
+msgid "Duration"
+msgstr ""
+
+#: inspiry-memberships.php:277 inspiry-memberships.php:348
+#: resources/membership/class-membership-admin-assign.php:234
+#: resources/membership/class-membership-custom-columns.php:39
+#: resources/membership/class-membership-frontend-assign.php:228
+msgid "Allowed Properties"
+msgstr ""
+
+#: inspiry-memberships.php:278
+msgid "Allowed Featured"
+msgstr ""
+
+#: inspiry-memberships.php:279
+msgid "Assigning this package will bypass payment and immediately grant the user the specified duration and property capabilities."
+msgstr ""
+
+#: inspiry-memberships.php:344
+msgid "Loading membership info…"
+msgstr ""
+
+#: inspiry-memberships.php:345
+msgid "Package Details"
+msgstr ""
+
+#: inspiry-memberships.php:349
+#: resources/membership/class-membership-custom-columns.php:40
+msgid "Featured Properties"
+msgstr ""
+
+#: inspiry-memberships.php:350
+msgid "Assigning this package bypasses payment and immediately grants the user the specified duration and property capabilities."
+msgstr ""
+
+#: inspiry-memberships.php:360
 msgid "Please deactivate the RealHomes Stripe Payments plugin to RealHomes Memberships plugin."
 msgstr ""
 
-#: inspiry-memberships.php:329
+#: inspiry-memberships.php:368
 msgid "Please deactivate the RealHomes PayPal Payments plugin to RealHomes Memberships plugin."
 msgstr ""
 
@@ -62,7 +110,7 @@ msgid "Day"
 msgstr ""
 
 #: resources/class-helper-functions.php:265
-#: resources/membership/class-membership-metaboxes.php:119
+#: resources/membership/class-membership-metaboxes.php:131
 msgid "Days"
 msgstr ""
 
@@ -71,7 +119,7 @@ msgid "Week"
 msgstr ""
 
 #: resources/class-helper-functions.php:267
-#: resources/membership/class-membership-metaboxes.php:122
+#: resources/membership/class-membership-metaboxes.php:134
 msgid "Weeks"
 msgstr ""
 
@@ -80,7 +128,7 @@ msgid "Month"
 msgstr ""
 
 #: resources/class-helper-functions.php:269
-#: resources/membership/class-membership-metaboxes.php:125
+#: resources/membership/class-membership-metaboxes.php:137
 msgid "Months"
 msgstr ""
 
@@ -89,7 +137,7 @@ msgid "Year"
 msgstr ""
 
 #: resources/class-helper-functions.php:271
-#: resources/membership/class-membership-metaboxes.php:128
+#: resources/membership/class-membership-metaboxes.php:140
 msgid "Years"
 msgstr ""
 
@@ -103,6 +151,7 @@ msgid "Your Order"
 msgstr ""
 
 #: resources/class-helper-functions.php:347
+#: resources/membership/class-membership-admin-assign.php:157
 msgid "Package"
 msgstr ""
 
@@ -253,6 +302,8 @@ msgstr ""
 
 #: resources/membership/class-ims-cpt-membership.php:38
 #: resources/membership/class-ims-cpt-membership.php:49
+#: resources/membership/class-membership-frontend-assign.php:46
+#: resources/membership/class-membership-frontend-assign.php:47
 #: resources/settings/admin-menu.php:49 resources/settings/admin-menu.php:50
 #: resources/settings/panel/memberships.php:18
 msgid "Memberships"
@@ -266,7 +317,7 @@ msgstr ""
 
 #: resources/membership/class-ims-cpt-membership.php:40
 #: resources/membership/class-ims-cpt-membership.php:41
-#: resources/settings/admin-menu.php:62
+#: resources/settings/admin-menu.php:69
 msgid "Add New Membership"
 msgstr ""
 
@@ -275,7 +326,7 @@ msgid "Edit Membership"
 msgstr ""
 
 #: resources/membership/class-ims-cpt-membership.php:43
-#: resources/settings/admin-menu.php:63
+#: resources/settings/admin-menu.php:70
 msgid "New Membership"
 msgstr ""
 
@@ -327,16 +378,135 @@ msgstr ""
 msgid "Once Yearly"
 msgstr ""
 
+#: resources/membership/class-membership-admin-assign.php:46
+#: resources/membership/class-membership-admin-assign.php:47
+#: resources/membership/class-membership-admin-assign.php:91
+#: resources/membership/class-membership-admin-assign.php:179
+#: resources/membership/class-membership-frontend-assign.php:65
+#: resources/membership/class-membership-frontend-assign.php:186
+msgid "Assign Membership"
+msgstr ""
+
+#: resources/membership/class-membership-admin-assign.php:59
+msgid "You are not allowed to view this page."
+msgstr ""
+
+#: resources/membership/class-membership-admin-assign.php:93
+msgid "View Packages"
+msgstr ""
+
+#: resources/membership/class-membership-admin-assign.php:96
+msgid "View Receipts"
+msgstr ""
+
+#: resources/membership/class-membership-admin-assign.php:102
+#: resources/membership/class-membership-frontend-assign.php:115
+msgid "Membership assigned successfully."
+msgstr ""
+
+#: resources/membership/class-membership-admin-assign.php:106
+msgid "Failed to assign membership. Please check user and package selection."
+msgstr ""
+
+#: resources/membership/class-membership-admin-assign.php:113
+msgid "Manual Membership Assignment"
+msgstr ""
+
+#: resources/membership/class-membership-admin-assign.php:117
+msgid "Select a user and a membership package to assign it manually. This bypasses payment and grants the membership immediately. Selecting \"None\" will cancel the user's current membership."
+msgstr ""
+
+#: resources/membership/class-membership-admin-assign.php:128
+#: resources/receipt/class-receipt-custom-columns.php:43
+msgid "User"
+msgstr ""
+
+#: resources/membership/class-membership-admin-assign.php:142
+msgid "— Select User —"
+msgstr ""
+
+#: resources/membership/class-membership-admin-assign.php:161
+msgid "None (Cancel Current Membership)"
+msgstr ""
+
+#: resources/membership/class-membership-admin-assign.php:168
+msgid "No published packages found"
+msgstr ""
+
+#: resources/membership/class-membership-admin-assign.php:196
+#: resources/membership/class-membership-frontend-assign.php:199
+msgid "Permission denied."
+msgstr ""
+
+#: resources/membership/class-membership-admin-assign.php:201
+#: resources/membership/class-membership-frontend-assign.php:204
+msgid "Invalid user ID."
+msgstr ""
+
+#: resources/membership/class-membership-admin-assign.php:208
+#: resources/membership/class-membership-frontend-assign.php:209
+msgid "This user does not currently have an active membership package."
+msgstr ""
+
+#: resources/membership/class-membership-admin-assign.php:216
+#: resources/membership/class-membership-frontend-assign.php:214
+msgid "User has an invalid or expired membership."
+msgstr ""
+
+#: resources/membership/class-membership-admin-assign.php:224
+#: resources/membership/class-membership-frontend-assign.php:218
+msgid "N/A"
+msgstr ""
+
+#: resources/membership/class-membership-admin-assign.php:230
+#: resources/membership/class-membership-frontend-assign.php:221
+msgid "Currently Active Package"
+msgstr ""
+
+#: resources/membership/class-membership-admin-assign.php:232
+#: resources/membership/class-membership-frontend-assign.php:222
+msgid "Package Title"
+msgstr ""
+
+#: resources/membership/class-membership-admin-assign.php:233
+#: resources/membership/class-membership-frontend-assign.php:223
+msgid "Expiry Date"
+msgstr ""
+
+#: resources/membership/class-membership-admin-assign.php:235
+msgid "Properties Remaining"
+msgstr ""
+
+#: resources/membership/class-membership-admin-assign.php:249
+#: resources/membership/class-membership-frontend-assign.php:240
+msgid "You are not allowed to do this."
+msgstr ""
+
+#: resources/membership/class-membership-admin-assign.php:256
+#: resources/membership/class-membership-frontend-assign.php:244
+msgid "Security check failed."
+msgstr ""
+
+#: resources/membership/class-membership-admin-user-profile.php:53
+msgid "Membership Assignment"
+msgstr ""
+
+#: resources/membership/class-membership-admin-user-profile.php:56
+msgid "Select Membership"
+msgstr ""
+
+#: resources/membership/class-membership-admin-user-profile.php:59
+#: resources/membership/class-membership-metaboxes.php:128
+#: resources/receipt/class-receipt-metaboxes.php:163
+msgid "None"
+msgstr ""
+
+#: resources/membership/class-membership-admin-user-profile.php:70
+msgid "Selecting a membership here will assign it manually to this user, bypassing the payment process. If changed to \"None\", the current membership will be cancelled."
+msgstr ""
+
 #: resources/membership/class-membership-custom-columns.php:38
 msgid "Membership Title"
-msgstr ""
-
-#: resources/membership/class-membership-custom-columns.php:39
-msgid "Allowed Properties"
-msgstr ""
-
-#: resources/membership/class-membership-custom-columns.php:40
-msgid "Featured Properties"
 msgstr ""
 
 #: resources/membership/class-membership-custom-columns.php:42
@@ -360,6 +530,47 @@ msgstr ""
 msgid "Free"
 msgstr ""
 
+#: resources/membership/class-membership-frontend-assign.php:58
+#: resources/membership/class-membership-frontend-assign.php:59
+msgid "My Memberships"
+msgstr ""
+
+#: resources/membership/class-membership-frontend-assign.php:66
+msgid "Assign Membership to User"
+msgstr ""
+
+#: resources/membership/class-membership-frontend-assign.php:115
+msgid "Success"
+msgstr ""
+
+#: resources/membership/class-membership-frontend-assign.php:117
+msgid "Error"
+msgstr ""
+
+#: resources/membership/class-membership-frontend-assign.php:117
+msgid "Failed to assign membership or invalid user data provided."
+msgstr ""
+
+#: resources/membership/class-membership-frontend-assign.php:131
+msgid "Select User"
+msgstr ""
+
+#: resources/membership/class-membership-frontend-assign.php:142
+msgid "-- Select User --"
+msgstr ""
+
+#: resources/membership/class-membership-frontend-assign.php:157
+msgid "Select Membership Package"
+msgstr ""
+
+#: resources/membership/class-membership-frontend-assign.php:159
+msgid "None (Cancel Current)"
+msgstr ""
+
+#: resources/membership/class-membership-frontend-assign.php:229
+msgid "Properties Remained"
+msgstr ""
+
 #: resources/membership/class-membership-metaboxes.php:37
 msgid "Membership Detail"
 msgstr ""
@@ -369,63 +580,66 @@ msgid "Total number of allowed properties"
 msgstr ""
 
 #: resources/membership/class-membership-metaboxes.php:67
-#: resources/membership/class-membership-metaboxes.php:96
+#: resources/membership/class-membership-metaboxes.php:108
 msgid "Example: 20"
 msgstr ""
 
 #: resources/membership/class-membership-metaboxes.php:74
-msgid "Max number of featured properties"
+msgid "Total number of allowed properties (including drafts/pending)"
 msgstr ""
 
 #: resources/membership/class-membership-metaboxes.php:79
-msgid "Example: 4"
+msgid "Example: 30 (Leave empty for no limit)"
 msgstr ""
 
 #: resources/membership/class-membership-metaboxes.php:86
+msgid "Max number of featured properties"
+msgstr ""
+
+#: resources/membership/class-membership-metaboxes.php:91
+msgid "Example: 4"
+msgstr ""
+
+#: resources/membership/class-membership-metaboxes.php:98
 msgid "Membership price"
 msgstr ""
 
-#: resources/membership/class-membership-metaboxes.php:99
+#: resources/membership/class-membership-metaboxes.php:111
 #, php-format
 msgid "%sNote:%s The price of a membership package can’t be changed after creating the package. If you want to change the price of the package later on then please create another one."
 msgstr ""
 
-#: resources/membership/class-membership-metaboxes.php:108
+#: resources/membership/class-membership-metaboxes.php:120
 msgid "Membership billing period"
 msgstr ""
 
-#: resources/membership/class-membership-metaboxes.php:116
-#: resources/receipt/class-receipt-metaboxes.php:163
-msgid "None"
-msgstr ""
-
-#: resources/membership/class-membership-metaboxes.php:131
+#: resources/membership/class-membership-metaboxes.php:143
 msgid "Provide a number and select related duration."
 msgstr ""
 
-#: resources/membership/class-membership-metaboxes.php:140
+#: resources/membership/class-membership-metaboxes.php:152
 msgid "Mark this package as Popular?"
 msgstr ""
 
-#: resources/membership/class-membership-metaboxes.php:153
+#: resources/membership/class-membership-metaboxes.php:165
 msgid "Stripe Product Price ID"
 msgstr ""
 
-#: resources/membership/class-membership-metaboxes.php:158
+#: resources/membership/class-membership-metaboxes.php:170
 #, php-format
 msgid "Required, If you are using Stripe for recurring payments. For more details see related guide %s."
 msgstr ""
 
-#: resources/membership/class-membership-metaboxes.php:158
-#: resources/membership/class-membership-metaboxes.php:169
+#: resources/membership/class-membership-metaboxes.php:170
+#: resources/membership/class-membership-metaboxes.php:181
 msgid "by clicking here"
 msgstr ""
 
-#: resources/membership/class-membership-metaboxes.php:164
+#: resources/membership/class-membership-metaboxes.php:176
 msgid "PayPal Plan Price ID"
 msgstr ""
 
-#: resources/membership/class-membership-metaboxes.php:169
+#: resources/membership/class-membership-metaboxes.php:181
 #, php-format
 msgid "Required, If you are using PayPal for recurring payments. For more details see related guide %s."
 msgstr ""
@@ -540,7 +754,7 @@ msgstr ""
 
 #: resources/receipt/class-ims-cpt-receipt.php:32
 #: resources/receipt/class-ims-cpt-receipt.php:43
-#: resources/settings/admin-menu.php:69 resources/settings/admin-menu.php:70
+#: resources/settings/admin-menu.php:76 resources/settings/admin-menu.php:77
 msgid "Receipts"
 msgstr ""
 
@@ -552,7 +766,7 @@ msgstr ""
 
 #: resources/receipt/class-ims-cpt-receipt.php:34
 #: resources/receipt/class-ims-cpt-receipt.php:35
-#: resources/settings/admin-menu.php:76
+#: resources/settings/admin-menu.php:83
 msgid "Add New Receipt"
 msgstr ""
 
@@ -561,7 +775,7 @@ msgid "Edit Receipt"
 msgstr ""
 
 #: resources/receipt/class-ims-cpt-receipt.php:37
-#: resources/settings/admin-menu.php:77
+#: resources/settings/admin-menu.php:84
 msgid "New Receipt"
 msgstr ""
 
@@ -596,10 +810,6 @@ msgstr ""
 #: resources/receipt/class-receipt-custom-columns.php:40
 #: resources/receipt/class-receipt-metaboxes.php:83
 msgid "Receipt For"
-msgstr ""
-
-#: resources/receipt/class-receipt-custom-columns.php:43
-msgid "User"
 msgstr ""
 
 #: resources/receipt/class-receipt-custom-columns.php:44
@@ -705,6 +915,10 @@ msgstr ""
 
 #: resources/receipt/class-receipt-methods.php:72
 msgid "Recurring Membership"
+msgstr ""
+
+#: resources/settings/admin-menu.php:62 resources/settings/admin-menu.php:63
+msgid "Packages"
 msgstr ""
 
 #: resources/settings/panel/basic.php:20
