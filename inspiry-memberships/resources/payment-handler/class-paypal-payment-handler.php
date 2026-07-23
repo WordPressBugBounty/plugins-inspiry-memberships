@@ -132,6 +132,14 @@ if ( ! class_exists( 'IMS_PayPal_Payment_Handler' ) ) :
 		 */
 		public function create_paypal_order() {
 
+			if ( ! is_user_logged_in() ) {
+				echo wp_json_encode( array(
+					'success' => false,
+					'message' => esc_html__( 'Please log in to continue.', IMS_TEXT_DOMAIN ),
+				) );
+				die();
+			}
+
 			if ( ! isset( $_POST['nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['nonce'] ) ), 'membership-paypal-nonce' ) ) {
 				echo wp_json_encode( array(
 					'success' => false,
@@ -205,8 +213,10 @@ if ( ! class_exists( 'IMS_PayPal_Payment_Handler' ) ) :
 				$response = wp_safe_remote_post( $order_url, $request_args );
 
 				// Check for errors in the API request
-				if ( is_wp_error( $response ) ) {
-					die( esc_html__( 'Error: ', IMS_TEXT_DOMAIN ) . $response->get_error_message() );
+				$response_code = wp_remote_retrieve_response_code( $response );
+				if ( is_wp_error( $response ) || $response_code < 200 || $response_code >= 300 ) {
+					$error_message = is_wp_error( $response ) ? $response->get_error_message() : 'HTTP Error ' . $response_code;
+					die( esc_html__( 'Error: ', IMS_TEXT_DOMAIN ) . $error_message );
 				}
 
 				// Decode the JSON response
@@ -232,6 +242,13 @@ if ( ! class_exists( 'IMS_PayPal_Payment_Handler' ) ) :
 		 */
 		private function get_paypal_access_token() {
 
+			// Return cached token if still valid.
+			$cache_key = 'ims_paypal_token_' . md5( $this->client_id );
+			$cached    = get_transient( $cache_key );
+			if ( ! empty( $cached ) ) {
+				return $cached;
+			}
+
 			// PayPal API endpoint for obtaining access token
 			$token_url = $this->token_url;
 
@@ -253,8 +270,10 @@ if ( ! class_exists( 'IMS_PayPal_Payment_Handler' ) ) :
 			$response = wp_safe_remote_post( $token_url, $request_args );
 
 			// Check for errors in the API request
-			if ( is_wp_error( $response ) ) {
-				die( esc_html__( 'Error: ', IMS_TEXT_DOMAIN ) . $response->get_error_message() );
+			$response_code = wp_remote_retrieve_response_code( $response );
+			if ( is_wp_error( $response ) || $response_code < 200 || $response_code >= 300 ) {
+				$error_message = is_wp_error( $response ) ? $response->get_error_message() : 'HTTP Error ' . $response_code;
+				die( esc_html__( 'Error: ', IMS_TEXT_DOMAIN ) . $error_message );
 			}
 
 			// Decode the JSON response
@@ -263,6 +282,9 @@ if ( ! class_exists( 'IMS_PayPal_Payment_Handler' ) ) :
 
 			// Check if the access token is present in the response
 			if ( isset( $data['access_token'] ) ) {
+				// Cache the token for just under PayPal's TTL (typically 1 hour).
+				$ttl = isset( $data['expires_in'] ) ? intval( $data['expires_in'] ) - 60 : 3000;
+				set_transient( $cache_key, $data['access_token'], max( $ttl, 60 ) );
 				return $data['access_token'];
 			} else {
 				// Handle the case where access token retrieval failed
@@ -277,7 +299,48 @@ if ( ! class_exists( 'IMS_PayPal_Payment_Handler' ) ) :
 		 */
 		public function complete_paypal_order_payment() {
 
-			$orderID     = $_POST['order_id'];
+			if ( ! is_user_logged_in() ) {
+				echo wp_json_encode( array(
+					'success' => false,
+					'message' => esc_html__( 'Please log in to continue.', IMS_TEXT_DOMAIN ),
+				) );
+				die();
+			}
+
+			if ( ! isset( $_POST['nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['nonce'] ) ), 'membership-paypal-nonce' ) ) {
+				echo wp_json_encode( array(
+					'success' => false,
+					'message' => esc_html__( 'Security verification failed, please refresh the page and try again.', IMS_TEXT_DOMAIN ),
+				) );
+				die();
+			}
+
+			if ( empty( $_POST['order_id'] ) ) {
+				echo wp_json_encode( array(
+					'success' => false,
+					'message' => esc_html__( 'Invalid order ID.', IMS_TEXT_DOMAIN ),
+				) );
+				die();
+			}
+
+			if ( empty( $_POST['membership_id'] ) ) {
+				echo wp_json_encode( array(
+					'success' => false,
+					'message' => esc_html__( 'Missing membership ID.', IMS_TEXT_DOMAIN ),
+				) );
+				die();
+			}
+
+			$orderID       = sanitize_text_field( wp_unslash( $_POST['order_id'] ) );
+			$membership_id = intval( $_POST['membership_id'] );
+
+			$receipt_methods = new IMS_Receipt_Method();
+			// Before capturing payment check for existing receipt to ensure idempotency
+			$existing_receipt = $receipt_methods->get_receipt_by_paypal_id( $orderID );
+			if ( ! empty( $existing_receipt ) ) {
+				die( json_encode( array( 'redirect_url' => IMS_Helper_Functions::$membership_page_url ) ) );
+			}
+
 			$accessToken = $this->get_paypal_access_token();
 
 			// PayPal API endpoint for capturing a payment
@@ -295,8 +358,10 @@ if ( ! class_exists( 'IMS_PayPal_Payment_Handler' ) ) :
 			$response = wp_safe_remote_post( $capture_url, $request_args );
 
 			// Check for errors in the API request
-			if ( is_wp_error( $response ) ) {
-				die( esc_html__( 'Error: ', 'realhomes-paypal-payments' ) . $response->get_error_message() );
+			$response_code = wp_remote_retrieve_response_code( $response );
+			if ( is_wp_error( $response ) || $response_code < 200 || $response_code >= 300 ) {
+				$error_message = is_wp_error( $response ) ? $response->get_error_message() : 'HTTP Error ' . $response_code;
+				die( esc_html__( 'Error: ', 'realhomes-paypal-payments' ) . $error_message );
 			}
 
 			// Decode the JSON response
@@ -313,16 +378,24 @@ if ( ! class_exists( 'IMS_PayPal_Payment_Handler' ) ) :
 				$payment_detail = $payment_data['purchase_units'][0]['payments']['captures'][0];
 
 				// Prepare the property payment details from payment data
-				$membership_id = $payment_detail['custom_id'];
-				$payment_id    = $payment_detail['id'];
+				$paypal_custom_id = intval( $payment_detail['custom_id'] );
+				$payment_id       = $payment_detail['id'];
+
+				// Verify the membership ID from PayPal matches what the user requested.
+				if ( $paypal_custom_id !== $membership_id ) {
+					echo wp_json_encode( array(
+						'success' => false,
+						'message' => esc_html__( 'Membership ID mismatch. Please try again.', IMS_TEXT_DOMAIN ),
+					) );
+					die();
+				}
 
 				$membership_methods = new IMS_Membership_Method();
-				$receipt_methods    = new IMS_Receipt_Method();
 
 				// Add membership.
 				$membership_methods->add_user_membership( $current_user->ID, $membership_id, 'paypal' );
-				// Generate receipt.
-				$receipt_id = $receipt_methods->generate_receipt( $current_user->ID, $membership_id, 'paypal', $payment_id );
+				// Generate receipt using $orderID to support idempotency check
+				$receipt_id = $receipt_methods->generate_receipt( $current_user->ID, $membership_id, 'paypal', $orderID );
 
 				// Mail the users.
 				if ( ! empty( $receipt_id ) ) {
@@ -348,21 +421,106 @@ if ( ! class_exists( 'IMS_PayPal_Payment_Handler' ) ) :
 		 */
 		public function add_recurring_membership() {
 
+			if ( ! is_user_logged_in() ) {
+				echo wp_json_encode( array(
+					'success' => false,
+					'message' => esc_html__( 'Please log in to continue.', IMS_TEXT_DOMAIN ),
+				) );
+				die();
+			}
+
+			if ( ! isset( $_POST['nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['nonce'] ) ), 'membership-paypal-nonce' ) ) {
+				echo wp_json_encode( array(
+					'success' => false,
+					'message' => esc_html__( 'Security verification failed, please refresh the page and try again.', IMS_TEXT_DOMAIN ),
+				) );
+				die();
+			}
+
 			if ( ! empty( $_POST['subscription_id'] ) && ! empty( $_POST['package_id'] ) ) {
 
-				// Get current user.
-				$current_user    = wp_get_current_user();
-				$package_id      = $_POST['package_id'];
-				$subscription_id = $_POST['subscription_id'];
+				$package_id      = intval( $_POST['package_id'] );
+				$subscription_id = sanitize_text_field( wp_unslash( $_POST['subscription_id'] ) );
 
-				// Store the profile id in user meta.
+				// Fetch PayPal access token
+				$accessToken = $this->get_paypal_access_token();
+				if ( empty( $accessToken ) ) {
+					echo wp_json_encode( array(
+						'success' => false,
+						'message' => esc_html__( 'Failed to retrieve PayPal access token.', IMS_TEXT_DOMAIN ),
+					) );
+					die();
+				}
+
+				// Build the request URL to verify subscription details
+				$paypal_settings  = get_option( 'ims_paypal_settings' );
+				$base             = isset( $paypal_settings['ims_paypal_test_mode'] ) ? 'https://api-m.sandbox.paypal.com' : 'https://api-m.paypal.com';
+				$subscription_url = $base . '/v1/billing/subscriptions/' . $subscription_id;
+
+				$request_args = array(
+					'headers' => array(
+						'Authorization' => 'Bearer ' . $accessToken,
+						'Content-Type'  => 'application/json',
+					),
+				);
+
+				$response = wp_safe_remote_get( $subscription_url, $request_args );
+
+				$response_code = wp_remote_retrieve_response_code( $response );
+				if ( is_wp_error( $response ) || $response_code < 200 || $response_code >= 300 ) {
+					echo wp_json_encode( array(
+						'success' => false,
+						'message' => esc_html__( 'Failed to verify subscription with PayPal.', IMS_TEXT_DOMAIN ),
+					) );
+					die();
+				}
+
+				$json_response     = wp_remote_retrieve_body( $response );
+				$subscription_data = json_decode( $json_response, true );
+
+				$expected_plan_id = get_post_meta( $package_id, 'ims_membership_paypal_plan_id', true );
+
+				// Verify subscription is active or approved.
+				if ( ! isset( $subscription_data['status'] ) || ! in_array( $subscription_data['status'], array( 'ACTIVE', 'APPROVED' ), true ) ) {
+					echo wp_json_encode( array(
+						'success' => false,
+						'message' => esc_html__( 'Subscription is not active or approved.', IMS_TEXT_DOMAIN ),
+					) );
+					die();
+				}
+
+				// Verify the subscription plan matches the requested membership package.
+				if ( empty( $expected_plan_id ) || ! isset( $subscription_data['plan_id'] ) || $subscription_data['plan_id'] !== $expected_plan_id ) {
+					echo wp_json_encode( array(
+						'success' => false,
+						'message' => esc_html__( 'Subscription plan mismatch.', IMS_TEXT_DOMAIN ),
+					) );
+					die();
+				}
+
+				// Verify the PayPal subscription belongs to the currently logged-in user
+				// by comparing the subscriber email returned by PayPal with the WP user email.
+				$current_user          = wp_get_current_user();
+				$paypal_subscriber_email = isset( $subscription_data['subscriber']['email_address'] )
+					? sanitize_email( $subscription_data['subscriber']['email_address'] )
+					: '';
+
+				if ( empty( $paypal_subscriber_email ) || strtolower( $paypal_subscriber_email ) !== strtolower( $current_user->user_email ) ) {
+					echo wp_json_encode( array(
+						'success' => false,
+						'message' => esc_html__( 'Subscription owner does not match the current user.', IMS_TEXT_DOMAIN ),
+					) );
+					die();
+				}
+
+				// Store the PayPal profile/subscription ID in user meta.
 				update_user_meta( $current_user->ID, 'ims_paypal_profile_id', $subscription_id );
 
 				$membership_methods = new IMS_Membership_Method();
 				$receipt_methods    = new IMS_Receipt_Method();
 
 				$membership_methods->add_user_membership( $current_user->ID, $package_id, 'paypal' );
-				$receipt_id = $receipt_methods->generate_recurring_paypal_receipt( $current_user->ID, $package_id, '' );
+				$receipt_id = $receipt_methods->generate_recurring_paypal_receipt( $current_user->ID, $package_id, $subscription_id );
 
 				if ( ! empty( $receipt_id ) ) {
 					IMS_Email::mail_user( $current_user->ID, $package_id, 'paypal' );
@@ -371,6 +529,12 @@ if ( ! class_exists( 'IMS_PayPal_Payment_Handler' ) ) :
 
 				die( json_encode( array( 'redirect_url' => IMS_Helper_Functions::$membership_page_url ) ) );
 			}
+
+			echo wp_json_encode( array(
+				'success' => false,
+				'message' => esc_html__( 'Invalid request parameters.', IMS_TEXT_DOMAIN ),
+			) );
+			die();
 		}
 
 		/**
@@ -505,7 +669,7 @@ if ( ! class_exists( 'IMS_PayPal_Payment_Handler' ) ) :
 				foreach ( $raw_post_array as $keyval ) {
 
 					$keyval = explode( '=', $keyval );
-					if ( 2 == count( $keyval ) ) {
+					if ( 2 === count( $keyval ) ) {
 						$myPost[ $keyval[0] ] = urldecode( $keyval[1] );
 					}
 
@@ -518,15 +682,8 @@ if ( ! class_exists( 'IMS_PayPal_Payment_Handler' ) ) :
 
 				// Read the IPN message sent from PayPal and prepend 'cmd=_notify-validate'
 				$req = 'cmd=_notify-validate';
-				if ( function_exists( 'get_magic_quotes_gpc' ) ) {
-					$get_magic_quotes_exists = true;
-				}
 				foreach ( $myPost as $key => $value ) {
-					if ( $get_magic_quotes_exists == true && 1 == get_magic_quotes_gpc() ) {
-						$value = urlencode( stripslashes( $value ) );
-					} else {
-						$value = urlencode( $value );
-					}
+					$value = urlencode( $value );
 					$req .= "&$key=$value";
 				}
 
@@ -538,23 +695,22 @@ if ( ! class_exists( 'IMS_PayPal_Payment_Handler' ) ) :
 					$paypal_ipn_url = 'https://www.paypal.com/cgi-bin/webscr';
 				}
 
-				$ch = curl_init( $paypal_ipn_url );
-				curl_setopt( $ch, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_1 );
-				curl_setopt( $ch, CURLOPT_POST, 1 );
-				curl_setopt( $ch, CURLOPT_RETURNTRANSFER, 1 );
-				curl_setopt( $ch, CURLOPT_POSTFIELDS, $req );
-				curl_setopt( $ch, CURLOPT_SSL_VERIFYPEER, 1 );
-				curl_setopt( $ch, CURLOPT_SSL_VERIFYHOST, 2 );
-				curl_setopt( $ch, CURLOPT_FORBID_REUSE, 1 );
-				curl_setopt( $ch, CURLOPT_HTTPHEADER, array( 'Connection: Close' ) );
+				$ipn_response = wp_safe_remote_post( $paypal_ipn_url, array(
+					'body'    => $req,
+					'headers' => array(
+						'Connection' => 'Close',
+					),
+					'timeout' => 30,
+				) );
 
-				$result = curl_exec( $ch );
-				if ( empty( $result ) ) {
-					curl_close( $ch );
-
+				if ( is_wp_error( $ipn_response ) ) {
 					return false;
-				} else {
-					curl_close( $ch );
+				}
+
+				$result = wp_remote_retrieve_body( $ipn_response );
+
+				if ( empty( $result ) ) {
+					return false;
 				}
 
 				// Inspect IPN validation result and act accordingly.

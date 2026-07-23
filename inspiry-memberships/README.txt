@@ -4,7 +4,7 @@ Tags: Membership, Real estate, Paid listing, Real estate memberships, Payments
 Requires at least: 6.0
 Tested up to: 7.0
 Requires PHP: 8.3
-Stable tag: 3.0.9
+Stable tag: 3.1.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -74,6 +74,14 @@ Simplify your membership management and elevate user experience with our compreh
 7. Wire Transfer Settings
 
 == Changelog ==
+
+= 3.1.0 =
+* Security fix: Added server-side PayPal subscriber email ownership verification in recurring membership handler to prevent subscription hijacking
+* Security fix: Added PayPal subscription plan ID emptiness check to prevent assignment via packages with no linked plan
+* Security fix: Added login check to free membership subscription handler
+* Security fix: Added free (zero-price) package verification to free membership subscription handler
+* Security fix: Added login check to wire transfer receipt handler
+* Tested plugin with WordPress 7.0.2
 
 = 3.0.9 =
 * Added manual membership package assignment functionality to front-end & backend dashboard

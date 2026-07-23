@@ -165,6 +165,39 @@ if ( ! class_exists( 'IMS_Receipt_Method' ) ) {
 			return $receipt_id;
 
 		}
+		/**
+		 * Method: Check if a receipt already exists for a given PayPal payment ID.
+		 *
+		 * @param string $payment_id PayPal transaction or payment ID.
+		 * @return array Existing receipt posts.
+		 * @since 3.1.0
+		 */
+		public function get_receipt_by_paypal_id( $payment_id ) {
+			if ( empty( $payment_id ) ) {
+				return array();
+			}
+
+			// Use the same dynamic prefix as generate_receipt() to ensure the lookup
+			// matches the key used when saving (ims_receipt_payment_id).
+			$prefix = apply_filters( 'ims_receipt_meta_prefix', 'ims_receipt_' );
+
+			$args = array(
+				'post_type'      => 'ims_receipt',
+				'post_status'    => 'publish',
+				'meta_query'     => array(
+					array(
+						'key'     => "{$prefix}payment_id",
+						'value'   => $payment_id,
+						'compare' => '=',
+					),
+				),
+				'fields'         => 'ids',
+				'posts_per_page' => 1,
+				'no_found_rows'  => true,
+			);
+
+			return get_posts( $args );
+		}
 
 	}
 

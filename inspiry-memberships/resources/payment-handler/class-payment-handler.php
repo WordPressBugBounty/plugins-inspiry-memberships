@@ -39,12 +39,23 @@ if ( ! class_exists( 'IMS_Payment_Handler' ) ) :
 				&& isset( $_POST['ims_cancel_membership_nonce'] )
 				&& wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['ims_cancel_membership_nonce'] ) ), 'ims-cancel-membership-nonce' ) ) {
 
+				// Ensure the user is logged in before processing.
+				if ( ! is_user_logged_in() ) {
+					return;
+				}
+
 				// Bail if user id is empty.
 				if ( ! isset( $_POST['user_id'] ) || empty( $_POST['user_id'] ) ) {
 					return;
 				}
 
 				$user_id = intval( $_POST['user_id'] );
+
+				// Authorization check: only allow a user to cancel their own membership,
+				// unless the current user is an administrator.
+				if ( get_current_user_id() !== $user_id && ! current_user_can( 'manage_options' ) ) {
+					return;
+				}
 
 				// Get current vendor.
 				$vendor = get_user_meta( $user_id, 'ims_current_vendor', true );
@@ -74,12 +85,23 @@ if ( ! class_exists( 'IMS_Payment_Handler' ) ) :
 				&& isset( $_POST['nonce'] )
 				&& wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['nonce'] ) ), 'membership-select-nonce' ) ) {
 
+				// Ensure the user is logged in before processing.
+				if ( ! is_user_logged_in() ) {
+					return;
+				}
+
 				// Bail if membership id is empty.
 				if ( ! isset( $_POST['membership_id'] ) || empty( $_POST['membership_id'] ) ) {
 					return;
 				}
 
 				$membership_id = intval( $_POST['membership_id'] );
+
+				// Verify this is actually a free (zero-price) membership package.
+				$membership_obj = ims_get_membership_object( $membership_id );
+				if ( empty( $membership_obj ) || floatval( $membership_obj->get_price() ) > 0 ) {
+					return;
+				}
 
 				// Get current user.
 				$user    = wp_get_current_user();

@@ -48,6 +48,15 @@ if ( ! class_exists( 'IMS_Wire_Transfer_Handler' ) ) :
 		 */
 		public function send_wire_receipt() {
 
+			// Ensure the user is logged in before processing.
+			if ( ! is_user_logged_in() ) {
+				echo wp_json_encode( array(
+					'success' => false,
+					'message' => esc_html__( 'Please log in to continue.', IMS_TEXT_DOMAIN ),
+				) );
+				die();
+			}
+
 			if ( isset( $_POST['action'] ) && 'ims_send_wire_receipt' === $_POST['action'] && isset( $_POST['nonce'] ) && wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['nonce'] ) ), 'membership-wire-nonce' ) ) {
 
 				// Get membership id.

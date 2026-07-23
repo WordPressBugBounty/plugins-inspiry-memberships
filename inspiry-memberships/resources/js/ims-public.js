@@ -184,11 +184,11 @@
                     var stripeBtn = $( '#ims-stripe-payment-btn' );
                     if ( response.success ) {
                         let button_contents = `<button
-					class="stripe-checkout-btn btn btn-primary"
-					data-membership_id="${response.membership_id}"
-					data-nonce="${response.isp_nonce}"
-					data-key="${response.publishable_key}"
-					>${response.button_label}</button>`;
+						class="stripe-checkout-btn btn btn-primary"
+						data-membership_id="${response.membership_id}"
+						data-nonce="${response.isp_nonce}"
+						data-key="${response.publishable_key}"
+						>${response.button_label}</button>`;
                         stripeBtn.html( button_contents );
                         ims_process_stripe_payment(); // Apply the stripe payment action to the newly added stripe button.
                     } else {
@@ -226,13 +226,20 @@
                             data    : {
                                 action          : 'ims_add_paypal_recurring_membership', // Action name for the server-side function
                                 subscription_id : data.subscriptionID,
-                                package_id      : checkoutForm.find( 'input[name="package_id"]' ).val()
+                                package_id      : checkoutForm.find( 'input[name="package_id"]' ).val(),
+                                nonce           : checkoutForm.find( 'input[name="membership_paypal_nonce"]' ).val()
                             },
                             success : function ( response ) {
-
-                                let responseData = JSON.parse( response );
-                                if ( responseData.redirect_url ) {
+                                let responseData;
+                                try {
+                                    responseData = JSON.parse( response );
+                                } catch ( e ) {
+                                    responseData = response;
+                                }
+                                if ( responseData && responseData.redirect_url ) {
                                     window.location.href = responseData.redirect_url;
+                                } else if ( responseData && responseData.message ) {
+                                    alert( responseData.message );
                                 } else {
                                     alert( responseData );
                                 }
@@ -283,13 +290,22 @@
                             url     : ajaxurl, // Replace with the actual path to your PHP file
                             type    : 'POST',
                             data    : {
-                                action   : 'ims_complete_paypal_order_payment', // Action name for the server-side function
-                                order_id : data.orderID
+                                action        : 'ims_complete_paypal_order_payment', // Action name for the server-side function
+                                order_id      : data.orderID,
+                                membership_id : checkoutForm.find( 'input[name="package_id"]' ).val(),
+                                nonce         : checkoutForm.find( 'input[name="membership_paypal_nonce"]' ).val()
                             },
                             success : function ( response ) {
-                                let responseData = JSON.parse( response );
-                                if ( responseData.redirect_url ) {
+                                let responseData;
+                                try {
+                                    responseData = JSON.parse( response );
+                                } catch ( e ) {
+                                    responseData = response;
+                                }
+                                if ( responseData && responseData.redirect_url ) {
                                     window.location.href = responseData.redirect_url;
+                                } else if ( responseData && responseData.message ) {
+                                    alert( responseData.message );
                                 } else {
                                     alert( responseData );
                                 }
